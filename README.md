@@ -1,0 +1,1 @@
+An interactive, responsive web application designed to help users practice converting IPv4 addresses into 8-bit binary octets. Built with vanilla HTML, CSS, and JavaScript, it features built-in scoring, accessibility support, and input restrictions to prevent cheating.
