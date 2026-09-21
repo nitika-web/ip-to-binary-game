@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0b0b0c" id="tc">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>IP to Binary</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='112' fill='%230b0b0c'/><circle cx='205' cy='256' r='72' fill='none' stroke='%23f4f4f5' stroke-width='34'/><path d='M372 184V328' stroke='%23f4f4f5' stroke-width='34' stroke-linecap='round'/></svg>">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<meta name="apple-mobile-web-app-title" content="IP to Binary">
+<style>
+/* Default is the inverted look: light text on near-black. The Invert button flips it. */
+:root,:root[data-theme="dark"]{
+  --bg:#0b0b0c;--surface:#151517;--ink:#f4f4f5;--on-ink:#0b0b0c;--muted:#8c8c93;--line:#2c2c31;color-scheme:dark;
+}
+:root[data-theme="light"]{
+  --bg:#f6f6f4;--surface:#ffffff;--ink:#0d0d0e;--on-ink:#f6f6f4;--muted:#6b6b72;--line:#d8d8d4;color-scheme:light;
+}
+:root{
+  --sans:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono","DejaVu Sans Mono",monospace;
+  --r:16px;
+}
+*{box-sizing:border-box}
+[hidden]{display:none !important}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;background:var(--bg);overscroll-behavior-y:none;touch-action:pan-x pan-y} /* pan-x pan-y = scrolling yes, pinch / double-tap zoom no */
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font:400 16px/1.45 var(--sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  -webkit-tap-highlight-color:transparent;touch-action:pan-x pan-y;
+  /* Nothing on the page is selectable or copyable (inputs excepted, so typing works everywhere) */
+  -webkit-user-select:none;user-select:none;-webkit-touch-callout:none;
+}
+input{-webkit-user-select:text;user-select:text;-webkit-touch-callout:none}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+
+.app{
+  min-height:100vh;min-height:100dvh;min-height:var(--vh,100dvh);
+  max-width:680px;margin:0 auto;
+  --pad:clamp(16px,4.5vw,32px);
+  padding:var(--pad);
+  padding:calc(var(--pad) + env(safe-area-inset-top)) calc(var(--pad) + env(safe-area-inset-right)) calc(var(--pad) + env(safe-area-inset-bottom)) calc(var(--pad) + env(safe-area-inset-left));
+  display:flex;flex-direction:column;gap:clamp(14px,3vh,26px);
+}
+
+header{display:flex;align-items:center;justify-content:space-between;gap:10px}
+h1{margin:0;font-size:1.05rem;font-weight:650;letter-spacing:-.01em}
+.brand{display:flex;align-items:center;gap:10px}
+.mark{width:26px;height:26px;flex:none}
+.toolbar{display:flex;gap:8px}
+.chip{
+  height:34px;padding:0 14px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--ink);
+  font:500 .85rem/1 var(--sans);cursor:pointer;-webkit-appearance:none;appearance:none;
+  transition:background .15s,border-color .15s,color .15s;
+}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--on-ink)}
+@media (hover:hover){.chip:hover{border-color:var(--ink)}}
+
+main{flex:1;display:flex;flex-direction:column;justify-content:center;gap:clamp(12px,2.4vh,22px);min-width:0}
+.eyebrow{margin:0;text-align:center;color:var(--muted);font-size:.8rem;letter-spacing:.08em;text-transform:uppercase}
+.ip{
+  display:block;margin:0;text-align:center;white-space:nowrap;
+  font:700 2.2rem/1.1 var(--mono);letter-spacing:-.03em; /* JS fits the size to the width */
+}
+.ruler{position:absolute;left:-9999px;top:0;visibility:hidden;pointer-events:none;width:auto}
+.wt-wrap{display:flex;flex-direction:column;gap:4px}
+.weights{display:flex;gap:4px;font:.75rem var(--mono)}
+.weights span{flex:1;text-align:center;background:var(--surface);color:var(--muted);border-radius:8px;padding:5px 0}
+.weights.pow span{background:none;padding:0;font-size:.78rem;color:var(--ink)}
+sup{font-size:.72em;line-height:0;vertical-align:baseline;position:relative;top:-.5em}
+
+.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 10px}
+@media (min-width:640px){.fields{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.field label{display:block;margin-bottom:6px;color:var(--muted);font-size:.8rem}
+.field label b{color:var(--ink);font-weight:650}
+input{
+  display:block;width:100%;height:52px;margin:0;padding:0 4px;text-align:center;
+  font-family:var(--mono);font-weight:500;font-size:18px;font-size:clamp(17px,4.6vw,22px);line-height:1;letter-spacing:.06em;color:var(--ink);background:var(--surface);caret-color:var(--ink);
+  border:1px solid var(--line);border-radius:14px;-webkit-appearance:none;appearance:none;
+  transition:border-color .15s,box-shadow .15s;
+}
+input::placeholder{color:var(--muted);opacity:.45}
+input:focus-visible{outline:none;border-color:var(--ink);box-shadow:0 0 0 1px var(--ink)}
+input[aria-invalid="true"]{border:1px dashed var(--ink)}
+input[readonly]{-webkit-text-fill-color:var(--ink);opacity:1}
+input.ok{border-color:var(--ink)}
+input.peek{cursor:pointer;caret-color:transparent}
+input.reveal[readonly]{background:var(--ink);border:1px solid var(--ink);-webkit-text-fill-color:var(--on-ink);color:var(--on-ink)}
+
+.feedback{min-height:3.3em;text-align:center}
+.msg{margin:0;color:var(--muted);font-size:.95rem}
+.msg.err,.msg.ok{color:var(--ink);font-weight:600}
+.msg.err::before{content:"\2715\00a0"}
+.msg.ok::before{content:"\2713\00a0"}
+.answer{margin:2px 0 0;color:var(--muted);white-space:nowrap;font-family:var(--mono);font-size:.85rem;font-size:min(.95rem,calc((100vw - 2 * var(--pad)) / 22))}
+
+/* On-screen 0 / 1 keypad: shown on touch devices, so no system keyboard covers the screen */
+.keypad{display:none;grid-template-columns:1fr 1fr 1fr;gap:10px}
+@media (pointer:coarse){.keypad{display:grid}}
+.keypad.off{opacity:.4}
+.key{
+  height:56px;border-radius:var(--r);border:1px solid var(--line);background:var(--surface);color:var(--ink);
+  font:600 1.6rem/1 var(--mono);cursor:pointer;-webkit-appearance:none;appearance:none;padding:0;
+  transition:background .08s,color .08s;
+}
+.key.back{font-size:1.3rem}
+.key:active{background:var(--ink);color:var(--on-ink)}
+
+.row{display:flex;gap:10px}
+.btn{
+  height:52px;border-radius:var(--r);border:1px solid var(--line);background:transparent;color:var(--ink);
+  font:600 1rem/1 var(--sans);cursor:pointer;-webkit-appearance:none;appearance:none;transition:opacity .15s,border-color .15s;
+}
+.btn.primary{flex:1;background:var(--ink);border-color:var(--ink);color:var(--on-ink)}
+.btn.ghost{padding:0 22px}
+.btn:active{opacity:.7}
+@media (hover:hover){.btn.ghost:hover{border-color:var(--ink)}.btn.primary:hover{opacity:.9}}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);text-align:center;margin:0;padding-top:14px;border-top:1px solid var(--line)}
+.stats div{display:flex;flex-direction:column;gap:2px}
+.stats b{font-size:1.15rem;font-weight:650;font-variant-numeric:tabular-nums}
+.stats span{color:var(--muted);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase}
+
+/* "See why" link under the answer */
+.link{margin-top:6px;padding:6px 4px;border:0;background:none;color:var(--ink);font:600 .9rem/1 var(--sans);text-decoration:underline;text-underline-offset:4px;cursor:pointer;-webkit-appearance:none;appearance:none}
+.link:active{opacity:.6}
+
+/* Pop-up: the lesson opens over the page after a wrong answer (bottom sheet on phones, centred on wide screens) */
+.overlay{position:fixed;inset:0;z-index:20;display:flex;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.6);opacity:0;transition:opacity .2s}
+.overlay.show{opacity:1}
+.sheet{
+  width:100%;max-width:560px;max-height:92%;display:flex;flex-direction:column;overflow:hidden;
+  background:var(--bg);border:1px solid var(--line);border-bottom:0;border-radius:24px 24px 0 0;
+  transform:translateY(28px);transition:transform .24s cubic-bezier(.2,.8,.2,1);
+}
+.overlay.show .sheet{transform:none}
+@media (min-width:640px){
+  .overlay{align-items:center;padding:24px}
+  .sheet{max-height:min(780px,100%);border-bottom:1px solid var(--line);border-radius:24px}
+}
+.sheet-head{padding:22px 22px 14px}
+.sheet-head h2{margin:0 0 4px;font-size:1.2rem;font-weight:700;letter-spacing:-.02em}
+.sheet-head p{margin:0;color:var(--muted);font-size:.88rem}
+.sheet-body{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:4px 22px 18px}
+.sheet-foot{padding:14px 22px;padding-bottom:calc(14px + env(safe-area-inset-bottom));border-top:1px solid var(--line);background:var(--bg)}
+
+/* Lesson content inside the pop-up */
+.lesson{display:flex;flex-direction:column;gap:14px;text-align:left;min-width:0}
+.lgoods{display:flex;flex-direction:column;gap:6px}
+.lgood{margin:0;color:var(--muted);font:.82rem/1.3 var(--mono)}
+.lgood::before{content:"\2713\00a0";color:var(--ink)}
+.lcard{display:flex;flex-direction:column;gap:12px;min-width:0;padding:16px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+.lhead{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.lhead h3{margin:0;font-size:1rem;font-weight:650}
+.lval{font:700 1.15rem/1 var(--mono);letter-spacing:-.02em}
+.why,.how,.sum{margin:0;font-size:.9rem}
+.why b,.sum{font-weight:650}
+.how{color:var(--muted)}
+.cap{margin:4px 0 -6px;color:var(--muted);font-size:.8rem}
+.g8{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:4px}
+.g8 span{text-align:center}
+.g8.pow span{font:.72rem/1.2 var(--mono);color:var(--muted)}
+.g8.wts span{font:.72rem/1.2 var(--mono);color:var(--muted);margin-top:-6px}
+.g8.bits span{padding:9px 0;font:600 1.05rem/1 var(--mono);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px}
+.g8.bits span.bad{border:1px dashed var(--ink)}
+.g8.bits span.fix{background:var(--ink);color:var(--on-ink);border-color:var(--ink)}
+
+/* Step-by-step is tucked away until asked for */
+.more{border-top:1px solid var(--line);padding-top:12px}
+.more summary{display:flex;align-items:center;justify-content:space-between;cursor:pointer;list-style:none;font-size:.92rem;font-weight:650}
+.more summary::-webkit-details-marker{display:none}
+.more summary::after{content:"+";font:500 1.2rem/1 var(--mono);color:var(--muted)}
+.more[open] summary::after{content:"\2212"}
+.more[open] summary{margin-bottom:10px}
+.more > .how{margin-bottom:8px}
+.more > .sum{margin-top:10px}
+.steps{display:flex;flex-direction:column;font:.85rem/1.3 var(--mono)}
+.step{display:grid;grid-template-columns:3.4ch minmax(0,1fr) 2.4ch;gap:10px;align-items:center;padding:6px 0;border-top:1px solid var(--line)}
+.step .w{font-weight:600}
+.step .t{color:var(--muted)}
+.step.on .t{color:var(--ink)}
+.step .bit{padding:3px 0;text-align:center;font-weight:700;border:1px solid var(--line);border-radius:6px}
+.step.on .bit{background:var(--ink);color:var(--on-ink);border-color:var(--ink)}
+
+/* Short screens (small phones, landscape): tighten everything so it all stays in view */
+.compact .app{gap:12px}
+.compact main{gap:10px}
+.compact .eyebrow{display:none}
+.compact input{height:46px}
+.compact .key,.compact .btn{height:48px}
+.compact .feedback{min-height:2.7em}
+.compact .stats{padding-top:10px}
+.compact .stats b{font-size:1rem}
+@media (max-width:340px){.fields{gap:10px 8px}.chip{padding:0 11px}}
+@media (min-width:900px){.app{max-width:720px}.key,.btn,input{height:58px}}
+
+.shake{animation:shake .32s linear}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+@media (prefers-reduced-motion:reduce){.shake{animation:none}*{transition:none !important}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 512 512" aria-hidden="true"><circle cx="205" cy="256" r="72" fill="none" stroke="currentColor" stroke-width="34"/><path d="M372 184V328" stroke="currentColor" stroke-width="34" stroke-linecap="round"/></svg>
+      <h1>IP to Binary</h1>
+    </div>
+    <div class="toolbar">
+      <button class="chip" id="weights-btn" type="button" aria-pressed="false">Weights</button>
+      <button class="chip" id="invert" type="button">Invert</button>
+    </div>
+  </header>
+
+  <main id="card">
+    <p class="eyebrow">Write it in binary</p>
+    <p class="ip" id="ip" aria-live="polite"></p>
+    <span class="ip ruler" id="ruler" aria-hidden="true">255.255.255.255</span>
+    <div class="wt-wrap" id="wt" hidden>
+      <div class="weights pow"><span>2<sup>7</sup></span><span>2<sup>6</sup></span><span>2<sup>5</sup></span><span>2<sup>4</sup></span><span>2<sup>3</sup></span><span>2<sup>2</sup></span><span>2<sup>1</sup></span><span>2<sup>0</sup></span></div>
+      <div class="weights"><span>128</span><span>64</span><span>32</span><span>16</span><span>8</span><span>4</span><span>2</span><span>1</span></div>
+    </div>
+    <div class="fields" id="fields"></div>
+    <div class="feedback" aria-live="polite">
+      <p class="msg" id="msg"></p>
+      <p class="answer" id="answer"></p>
+      <button class="link" id="why" type="button" hidden>See why</button>
+    </div>
+    <div class="keypad" id="keypad">
+      <button class="key" type="button" data-k="0" aria-label="Zero">0</button>
+      <button class="key" type="button" data-k="1" aria-label="One">1</button>
+      <button class="key back" type="button" data-k="back" aria-label="Delete">&#9003;</button>
+    </div>
+    <div class="row">
+      <button class="btn primary" id="check" type="button">Check</button>
+      <button class="btn ghost" id="skip" type="button">Skip</button>
+    </div>
+  </main>
+
+  <div class="stats">
+    <div><b id="ns">0</b><span>Solved</span></div>
+    <div><b id="ne">0</b><span>Errors</span></div>
+    <div><b id="nk">0</b><span>Streak</span></div>
+    <div><b id="nb">0</b><span>Best</span></div>
+  </div>
+</div>
+
+<div class="overlay" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title" hidden>
+  <div class="sheet">
+    <div class="sheet-head">
+      <h2 id="sheet-title">What went wrong</h2>
+      <p>Dashed boxes are your wrong bits. Filled boxes show what they should be.</p>
+    </div>
+    <div class="sheet-body lesson" id="lesson"></div>
+    <div class="sheet-foot row">
+      <button class="btn primary" id="sheet-next" type="button">Next address</button>
+      <button class="btn ghost" id="sheet-close" type="button">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============ Logic ============ */
+const rnd = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
+const pickOne = arr => arr[rnd(0, arr.length - 1)];
+const bin8 = v => v.toString(2).padStart(8, '0');
+
+// A fresh home/office-style address every time, e.g. 192.168.10.1, 10.4.77.23, 172.20.3.101.
+// Hundreds of thousands of possibilities; third number is often small and hosts are often .1 .10 .100 .254.
+function genIp() {
+  const third = () => Math.random() < 0.5 ? rnd(0, 20) : rnd(0, 255);
+  const host = () => Math.random() < 0.3 ? pickOne([1, 2, 10, 100, 101, 200, 254]) : rnd(1, 254);
+  const r = Math.random();
+  if (r < 0.6) return [192, 168, third(), host()];
+  if (r < 0.85) return [10, rnd(0, 255), rnd(0, 255), host()];
+  return [172, rnd(16, 31), third(), host()];
+}
+
+// One octet: 1 to 8 binary digits whose value matches.
+const okBits = (s, v) => { s = s.replace(/\s+/g, ''); return /^[01]{1,8}$/.test(s) && parseInt(s, 2) === v; };
+
+// Place values, left to right, and their powers of two (128 = 2^7 ... 1 = 2^0).
+const W = [128, 64, 32, 16, 8, 4, 2, 1];
+const POW = [7, 6, 5, 4, 3, 2, 1, 0];
+const list = a => a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1];
+
+// Works out what a wrong answer for one octet probably means.
+// Returns the bits as read (t8), the value they add up to (tv) and a plain-language reason (why).
+function explain(raw, v) {
+  const s = raw.replace(/\s+/g, '');
+  const t8 = s.padStart(8, '0'), c = bin8(v), tv = parseInt(s, 2);
+  const flip = [...t8].map(b => b === '1' ? '0' : '1').join('');
+  const rev = [...t8].reverse().join('');
+  const extra = [], missing = [];
+  for (let i = 0; i < 8; i++) {
+    if (t8[i] === '1' && c[i] === '0') extra.push(W[i]);
+    if (t8[i] === '0' && c[i] === '1') missing.push(W[i]);
+  }
+  const plural = a => a.length > 1;
+  const nbits = n => n + (n === 1 ? ' bit' : ' bits');
+  const diff = extra.length + missing.length; // pattern guesses only make sense when several bits differ
+  const details = [];
+  if (extra.length) details.push('You wrote 1 in the ' + list(extra) + (plural(extra) ? ' places' : ' place') + ', but ' + v + (plural(extra) ? " doesn't use them." : " doesn't use it."));
+  if (missing.length) details.push('You wrote 0 in the ' + list(missing) + (plural(missing) ? ' places' : ' place') + ', but ' + v + (plural(missing) ? ' needs them.' : ' needs it.'));
+
+  let why;
+  if (s.length < 8 && s + '0'.repeat(8 - s.length) === c) {
+    why = 'You wrote only ' + nbits(s.length) + '. An octet has 8, and a short answer is read from the right, so the missing ' + (8 - s.length === 1 ? '0 at the end' : '0s at the end') + ' changed every place value. Write all 8 bits.';
+  } else if (diff >= 2 && rev === c) {
+    why = 'The bits are in reverse order. The leftmost bit is the biggest place value (128) and the rightmost is the smallest (1).';
+  } else if (diff >= 2 && flip === c) {
+    why = 'Every bit is flipped. A 1 means that power of two is used and a 0 means it is not.';
+  } else if (s === String(v)) {
+    why = 'You copied the decimal digits of ' + v + ' as if they were binary. Binary needs place values: break ' + v + ' into 128s, 64s, 32s and so on.';
+  } else if (diff >= 2 && t8 === c.slice(1) + '0') {
+    why = 'Your bits are shifted one place to the left, so every 1 is worth double what it should be. Start at the 128 place and count 8 places.';
+  } else if (diff >= 2 && t8 === '0' + c.slice(0, 7)) {
+    why = 'Your bits are shifted one place to the right, so every 1 is worth half what it should be. Start at the 128 place and count 8 places.';
+  } else {
+    const pre = [];
+    if (s.length < 8) pre.push('You wrote ' + nbits(s.length) + '. A short answer is read from the right, as ' + t8 + '.');
+    if (Math.abs(tv - v) === 1) pre.push('Close: your bits add up to ' + tv + ', only 1 off.');
+    why = pre.concat(details).join(' ');
+  }
+  return { s, t8, tv, why, short: s !== t8 };
+}
+/* ---- logic end ---- */
+
+/* ============ UI ============ */
+const $ = id => document.getElementById(id);
+const ipEl = $('ip'), rulerEl = $('ruler'), fieldsEl = $('fields'), msgEl = $('msg'), answerEl = $('answer');
+const checkBtn = $('check'), skipBtn = $('skip'), cardEl = $('card'), keypadEl = $('keypad'), lessonEl = $('lesson');
+const sheetEl = $('sheet'), whyBtn = $('why'), appEl = document.querySelector('.app');
+const root = document.documentElement;
+const coarse = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches); // phones / tablets
+
+let ip = [], inputs = [], cur = 0, done = false, lastIp = '';
+let solved = 0, errors = 0, streak = 0, best = loadBest();
+
+function loadBest() { try { const v = parseInt(localStorage.getItem('ip2bin-best'), 10); return v > 0 ? v : 0; } catch (e) { return 0; } }
+function saveBest() { try { localStorage.setItem('ip2bin-best', String(best)); } catch (e) {} }
+function setMsg(text, cls) { msgEl.textContent = text; msgEl.className = 'msg' + (cls ? ' ' + cls : ''); }
+function updateStats() { $('ns').textContent = solved; $('ne').textContent = errors; $('nk').textContent = streak; $('nb').textContent = best; }
+
+/* ---- Fit to any screen ---- */
+// One font size for every address, chosen so the longest possible one (255.255.255.255) fits on a single line.
+function fitIp() {
+  rulerEl.style.fontSize = '100px';
+  const need = rulerEl.getBoundingClientRect().width, have = ipEl.clientWidth;
+  ipEl.style.fontSize = (need > 0 && have > 0) ? Math.max(18, Math.min(64, Math.floor(100 * have / need * 0.97))) + 'px' : '';
+}
+// Uses the visible area (shrinks with browser bars / rotation) and switches to a tighter layout on short screens.
+function layout() {
+  const vv = window.visualViewport;
+  const h = (vv && vv.height) || window.innerHeight || 800;
+  root.style.setProperty('--vh', Math.round(h) + 'px');
+  root.classList.toggle('compact', h < 640);
+  fitIp();
+}
+window.addEventListener('resize', layout);
+window.addEventListener('orientationchange', layout);
+if (window.visualViewport) window.visualViewport.addEventListener('resize', layout);
+
+/* ---- No zooming ---- */
+// Safari pinch (iPhone, iPad, Mac trackpad), two-finger pinch elsewhere, Ctrl/Cmd + scroll wheel, and Ctrl/Cmd + / - / 0.
+['gesturestart', 'gesturechange', 'gestureend'].forEach(t => document.addEventListener(t, e => e.preventDefault()));
+document.addEventListener('touchmove', e => { if (e.touches && e.touches.length > 1) e.preventDefault(); }, { passive: false });
+document.addEventListener('wheel', e => { if (e.ctrlKey || e.metaKey) e.preventDefault(); }, { passive: false });
+document.addEventListener('keydown', e => { if ((e.ctrlKey || e.metaKey) && ['+', '=', '-', '_', '0'].includes(e.key)) e.preventDefault(); });
+
+/* ---- No copy / paste / drag-in ---- */
+const block = e => e.preventDefault();
+['copy', 'cut', 'drop', 'dragover', 'dragstart'].forEach(t => document.addEventListener(t, block));
+document.addEventListener('paste', e => { e.preventDefault(); if (!done) setMsg('Pasting is turned off. Type your answer.'); });
+document.addEventListener('contextmenu', e => { if (e.target && (e.target.tagName === 'INPUT' || e.target === ipEl)) e.preventDefault(); });
+document.addEventListener('touchstart', () => {}, { passive: true }); // lets :active styles work on iOS Safari
+
+/* ---- Lesson after a wrong answer ---- */
+function el(tag, cls, text) {
+  const n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (text != null) n.textContent = text;
+  return n;
+}
+
+function lessonCard(i) {
+  const v = ip[i], c = bin8(v), info = explain(inputs[i].value, v);
+  const card = el('article', 'lcard');
+  const head = el('div', 'lhead');
+  head.append(el('h3', null, 'Octet ' + (i + 1)), el('span', 'lval', String(v)));
+  card.appendChild(head);
+
+  const why = el('p', 'why');
+  why.append(el('b', null, 'Why it is wrong. '), info.why);
+  card.appendChild(why);
+
+  // Powers of two and their values, then your bits against the right bits.
+  const pow = el('div', 'g8 pow');
+  POW.forEach(p => { const s = el('span'); s.append('2', el('sup', null, String(p))); pow.appendChild(s); });
+  const wts = el('div', 'g8 wts');
+  W.forEach(w => wts.appendChild(el('span', null, String(w))));
+  card.append(pow, wts);
+
+  card.appendChild(el('p', 'cap', 'You typed ' + info.s + ' = ' + info.tv + (info.short ? ' (read as ' + info.t8 + ')' : '')));
+  const you = el('div', 'g8 bits');
+  [...info.t8].forEach((b, k) => you.appendChild(el('span', b !== c[k] ? 'bad' : '', b)));
+  card.appendChild(you);
+
+  card.appendChild(el('p', 'cap', 'Right answer: ' + c + ' = ' + v));
+  const right = el('div', 'g8 bits');
+  [...c].forEach((b, k) => right.appendChild(el('span', info.t8[k] !== b ? 'fix' : '', b)));
+  card.appendChild(right);
+
+  // Steps: subtract each place value that fits.
+  const more = el('details', 'more');
+  more.appendChild(el('summary', null, 'How to get it right'));
+  more.appendChild(el('p', 'how', 'Start with ' + v + '. Go through the place values from 128 down to 1. If a place value fits in what is left, write 1 and subtract it. If not, write 0.'));
+  const steps = el('div', 'steps');
+  let left = v;
+  W.forEach(w => {
+    const fits = left >= w;
+    const row = el('div', 'step' + (fits ? ' on' : ''));
+    row.append(
+      el('span', 'w', String(w)),
+      el('span', 't', fits ? left + ' \u2265 ' + w + ', left ' + (left - w) : left + ' < ' + w + ', skip'),
+      el('span', 'bit', fits ? '1' : '0')
+    );
+    if (fits) left -= w;
+    steps.appendChild(row);
+  });
+  more.appendChild(steps);
+
+  const used = W.filter((w, k) => c[k] === '1');
+  more.appendChild(el('p', 'sum', used.length
+    ? 'Add the place values with a 1: ' + used.join(' + ') + ' = ' + v + '. So ' + v + ' is ' + c + '.'
+    : 'No place value fits, so ' + v + ' is ' + c + '.'));
+  card.appendChild(more);
+  return card;
+}
+
+function showLesson(ok) {
+  lessonEl.textContent = '';
+  ok.forEach((good, i) => { if (!good) lessonEl.appendChild(lessonCard(i)); });
+  const goods = ok.map((g, i) => g ? i : -1).filter(i => i >= 0);
+  if (goods.length) {
+    const box = el('div', 'lgoods');
+    goods.forEach(i => box.appendChild(el('p', 'lgood', 'Octet ' + (i + 1) + ' is right: ' + ip[i] + ' = ' + bin8(ip[i]))));
+    lessonEl.appendChild(box);
+  }
+  lessonEl.scrollTop = 0;
+}
+
+/* ---- Pop-up ---- */
+let sheetOpen = false, sheetTimer = 0;
+function openSheet() {
+  clearTimeout(sheetTimer);
+  sheetOpen = true;
+  sheetEl.hidden = false;
+  appEl.inert = true; // keeps focus and taps inside the pop-up
+  document.body.style.overflow = 'hidden';
+  void sheetEl.offsetWidth;
+  sheetEl.classList.add('show');
+  $('sheet-next').focus({ preventScroll: true });
+}
+function closeSheet(skipFocus) {
+  if (!sheetOpen) return;
+  sheetOpen = false;
+  sheetEl.classList.remove('show');
+  appEl.inert = false;
+  document.body.style.overflow = '';
+  sheetTimer = setTimeout(() => { sheetEl.hidden = true; }, 220);
+  if (!skipFocus) checkBtn.focus({ preventScroll: true });
+}
+sheetEl.addEventListener('click', e => { if (e.target === sheetEl) closeSheet(); });
+$('sheet-close').addEventListener('click', () => closeSheet());
+$('sheet-next').addEventListener('click', () => { closeSheet(true); newAddress(); });
+whyBtn.addEventListener('click', openSheet);
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && sheetOpen) closeSheet(); });
+
+/* ---- Round handling ---- */
+function newAddress() {
+  let next;
+  do { next = genIp(); } while (next.join('.') === lastIp);
+  ip = next; lastIp = ip.join('.'); done = false; cur = 0;
+  ipEl.textContent = lastIp;
+  answerEl.textContent = '';
+  closeSheet(true); lessonEl.textContent = ''; whyBtn.hidden = true;
+  window.scrollTo(0, 0);
+  checkBtn.textContent = 'Check'; skipBtn.hidden = false; keypadEl.classList.remove('off');
+  setMsg('');
+  buildFields();
+  layout();
+  inputs[0].focus({ preventScroll: true });
+}
+
+function setVal(i, v) {
+  inputs[i].value = v; inputs[i]._prev = v;
+  inputs[i].setAttribute('aria-invalid', 'false');
+}
+
+function buildFields() {
+  fieldsEl.textContent = '';
+  inputs = ip.map((v, i) => {
+    const wrap = document.createElement('div'); wrap.className = 'field';
+    const lab = document.createElement('label'); lab.htmlFor = 'f' + i;
+    lab.append('Octet ' + (i + 1) + ': ');
+    const b = document.createElement('b'); b.textContent = v; lab.appendChild(b);
+    const inp = document.createElement('input');
+    inp._prev = '';
+    inp.id = 'f' + i; inp.type = 'text'; inp.placeholder = '00000000';
+    inp.setAttribute('inputmode', coarse ? 'none' : 'numeric'); // touch devices use the on-screen keypad
+    inp.setAttribute('autocomplete', 'off'); inp.setAttribute('autocorrect', 'off');
+    inp.setAttribute('autocapitalize', 'off'); inp.setAttribute('spellcheck', 'false');
+    inp.setAttribute('enterkeyhint', i === 3 ? 'done' : 'next');
+    inp.addEventListener('focus', () => { cur = i; });
+    inp.addEventListener('click', () => {
+      if (!inp._wrong) return;
+      const show = !inp.classList.contains('reveal');
+      inp.classList.toggle('reveal', show);
+      inp.value = show ? bin8(ip[i]) : inp._mine;
+      inp.setAttribute('aria-label', 'Octet ' + (i + 1) + (show ? ' correct answer' : ' your answer, tap to see the correct one'));
+    });
+    inp.addEventListener('beforeinput', e => {
+      // refuse anything that isn't a single typed character: paste, drop, autofill, dictation, replacement text
+      if (/^insert(FromPaste|FromDrop|FromYank|ReplacementText|FromPasteAsQuotation)$/.test(e.inputType || '') || (e.data && e.data.length > 1)) e.preventDefault();
+    });
+    inp.addEventListener('input', () => onType(i));
+    inp.addEventListener('keydown', e => onKey(e, i));
+    wrap.append(lab, inp); fieldsEl.appendChild(wrap);
+    return inp;
+  });
+}
+
+// Physical keyboards: only 0 and 1 are kept, "." or space jumps ahead, 8 bits jumps ahead.
+function onType(i) {
+  const inp = inputs[i], raw = inp.value;
+  if (raw.length - inp._prev.length > 1) { inp.value = inp._prev; return; } // several characters at once = paste-like, undo it
+  const sep = /[.\s]$/.test(raw);
+  const v = raw.replace(/[^01]/g, '').slice(0, 8);
+  setVal(i, v);
+  if (v && (v.length === 8 || sep) && i < inputs.length - 1) { inputs[i + 1].focus(); inputs[i + 1].select(); }
+}
+
+function onKey(e, i) {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    if (!done && i < inputs.length - 1 && !inputs[i + 1].value.trim()) inputs[i + 1].focus(); else check();
+  } else if (e.key === 'Backspace' && !inputs[i].value && i > 0) {
+    inputs[i - 1].focus();
+  }
+}
+
+// On-screen keypad (touch devices)
+function press(k) {
+  if (done || !inputs.length) return;
+  const inp = inputs[cur];
+  if (k === 'back') {
+    if (inp.value) setVal(cur, inp.value.slice(0, -1));
+    else if (cur > 0) { cur--; setVal(cur, inputs[cur].value.slice(0, -1)); }
+  } else if (inp.value.length < 8) {
+    setVal(cur, inp.value + k);
+    if (inputs[cur].value.length === 8 && cur < inputs.length - 1) cur++;
+  }
+  inputs[cur].focus({ preventScroll: true });
+}
+keypadEl.querySelectorAll('.key').forEach(b => {
+  b.addEventListener('mousedown', e => e.preventDefault()); // keep focus in the box on desktop
+  b.addEventListener('click', () => press(b.dataset.k));
+});
+
+function check() {
+  if (done) { newAddress(); return; }
+  inputs.forEach(x => x.setAttribute('aria-invalid', 'false'));
+  const empty = inputs.find(x => !x.value.trim());
+  if (empty) { setMsg('Fill in all four boxes.', 'err'); empty.focus({ preventScroll: true }); return; }
+  const ok = inputs.map((x, i) => okBits(x.value, ip[i]));
+  if (ok.every(Boolean)) {
+    solved++; streak++;
+    if (streak > best) { best = streak; saveBest(); }
+    done = true; inputs.forEach(x => { x.readOnly = true; x.classList.add('ok'); });
+    setMsg('Correct.', 'ok');
+    answerEl.textContent = ip.map(bin8).join('.');
+    checkBtn.textContent = 'Next address'; skipBtn.hidden = true; keypadEl.classList.add('off');
+    updateStats();
+    return;
+  }
+  errors++; streak = 0; updateStats();
+  const wrong = [];
+  ok.forEach((g, i) => { if (!g) { inputs[i].setAttribute('aria-invalid', 'true'); wrong.push(i + 1); } });
+  // A wrong check ends the round: show the right answer, why each octet was wrong, and the steps.
+  done = true; inputs.forEach((x, i) => { x.readOnly = true; if (ok[i]) x.classList.add('ok'); });
+  setMsg('Not quite. Octet' + (wrong.length > 1 ? 's ' : ' ') + list(wrong.map(String)) + (wrong.length > 1 ? ' are' : ' is') + ' wrong. Tap a dashed box to see the right answer.', 'err');
+  answerEl.textContent = '';
+  ok.forEach((g, i) => {
+    if (g) return;
+    const x = inputs[i];
+    x._wrong = true; x._mine = x.value; x.classList.add('peek');
+    x.setAttribute('aria-label', 'Octet ' + (i + 1) + ' your answer, tap to see the correct one');
+  });
+  checkBtn.textContent = 'Next address'; skipBtn.hidden = true; keypadEl.classList.add('off');
+  whyBtn.hidden = false;
+  cardEl.classList.remove('shake'); void cardEl.offsetWidth; cardEl.classList.add('shake');
+  showLesson(ok);
+}
+
+checkBtn.addEventListener('click', check);
+skipBtn.addEventListener('click', () => { if (!done) newAddress(); });
+$('weights-btn').addEventListener('click', e => {
+  const on = e.currentTarget.getAttribute('aria-pressed') !== 'true';
+  e.currentTarget.setAttribute('aria-pressed', String(on));
+  $('wt').hidden = !on; layout();
+});
+$('invert').addEventListener('click', () => {
+  const light = root.dataset.theme !== 'light';
+  root.dataset.theme = light ? 'light' : 'dark';
+  $('tc').setAttribute('content', light ? '#f6f6f4' : '#0b0b0c'); // browser bar colour on iPhone / Android
+});
+
+updateStats();
+newAddress();
+</script>
+</body>
+</html>
