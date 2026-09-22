@@ -1,0 +1,1468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0b0b0c" id="tc">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>IP to Binary - Network Trainer</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='112' fill='%230b0b0c'/><circle cx='205' cy='256' r='72' fill='none' stroke='%23f4f4f5' stroke-width='34'/><path d='M372 184V328' stroke='%23f4f4f5' stroke-width='34' stroke-linecap='round'/></svg>">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<meta name="apple-mobile-web-app-title" content="IP to Binary">
+<style>
+/* Default is the inverted look: light text on near-black. The Theme control flips it. */
+:root,:root[data-theme="dark"]{
+  --bg:#0b0b0c;--surface:#151517;--ink:#f4f4f5;--on-ink:#0b0b0c;--muted:#8c8c93;--line:#2c2c31;color-scheme:dark;
+}
+:root[data-theme="light"]{
+  --bg:#f6f6f4;--surface:#ffffff;--ink:#0d0d0e;--on-ink:#f6f6f4;--muted:#6b6b72;--line:#d8d8d4;color-scheme:light;
+}
+:root{
+  --sans:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono","DejaVu Sans Mono",monospace;
+  --r:16px;
+}
+*{box-sizing:border-box}
+[hidden]{display:none !important}
+/* Scroll where needed, but never show the scrollbar itself */
+*{scrollbar-width:none;-ms-overflow-style:none}
+*::-webkit-scrollbar{width:0;height:0;display:none}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;background:var(--bg);overscroll-behavior-y:none;touch-action:pan-x pan-y} /* pan-x pan-y = scrolling yes, pinch / double-tap zoom no */
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font:400 16px/1.45 var(--sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  -webkit-tap-highlight-color:transparent;touch-action:pan-x pan-y;
+  /* Nothing on the page is selectable or copyable (inputs excepted, so typing works everywhere) */
+  -webkit-user-select:none;user-select:none;-webkit-touch-callout:none;
+}
+input{-webkit-user-select:text;user-select:text;-webkit-touch-callout:none}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+
+.app{
+  min-height:100vh;min-height:100dvh;min-height:var(--vh,100dvh);
+  max-width:680px;margin:0 auto;
+  --pad:clamp(16px,4.5vw,32px);
+  padding:var(--pad);
+  padding:calc(var(--pad) + env(safe-area-inset-top)) calc(var(--pad) + env(safe-area-inset-right)) calc(var(--pad) + env(safe-area-inset-bottom)) calc(var(--pad) + env(safe-area-inset-left));
+  display:flex;flex-direction:column;gap:clamp(14px,3vh,26px);
+}
+
+header{display:flex;align-items:center;justify-content:space-between;gap:10px}
+h1{margin:0;font-size:1.05rem;font-weight:650;letter-spacing:-.01em}
+.brand{display:flex;align-items:center;gap:10px}
+.mark{width:26px;height:26px;flex:none}
+.chip{
+  height:34px;padding:0 14px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--ink);
+  font:500 .85rem/1 var(--sans);cursor:pointer;-webkit-appearance:none;appearance:none;
+  transition:background .15s,border-color .15s,color .15s;
+}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--on-ink)}
+@media (hover:hover){.chip:hover{border-color:var(--ink)}}
+
+main{flex:1;display:flex;flex-direction:column;justify-content:center;gap:clamp(12px,2.4vh,22px);min-width:0}
+.eyebrow{margin:0;text-align:center;color:var(--muted);font-size:.8rem;letter-spacing:.08em;text-transform:uppercase}
+.ip{
+  display:block;margin:0;text-align:center;white-space:nowrap;
+  font:700 2.2rem/1.1 var(--mono);letter-spacing:-.03em; /* JS fits the size to the width */
+}
+.ruler{position:absolute;left:-9999px;top:0;visibility:hidden;pointer-events:none;width:auto}
+.wt-wrap{display:flex;flex-direction:column;gap:4px}
+.weights{display:flex;gap:4px;font:.75rem var(--mono)}
+.weights span{flex:1;text-align:center;background:var(--surface);color:var(--muted);border-radius:8px;padding:5px 0}
+.weights.pow span{background:none;padding:0;font-size:.78rem;color:var(--ink)}
+sup{font-size:.72em;line-height:0;vertical-align:baseline;position:relative;top:-.5em}
+
+.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 10px}
+@media (min-width:640px){.fields{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.field label{display:block;margin-bottom:6px;color:var(--muted);font-size:.8rem}
+.field label b{color:var(--ink);font-weight:650}
+input{
+  display:block;width:100%;height:52px;margin:0;padding:0 4px;text-align:center;
+  font-family:var(--mono);font-weight:500;font-size:18px;font-size:clamp(17px,4.6vw,22px);line-height:1;letter-spacing:.06em;color:var(--ink);background:var(--surface);caret-color:var(--ink);
+  border:1px solid var(--line);border-radius:14px;-webkit-appearance:none;appearance:none;
+  transition:border-color .15s,box-shadow .15s;
+}
+input::placeholder{color:var(--muted);opacity:.45}
+input:focus-visible{outline:none;border-color:var(--ink);box-shadow:0 0 0 1px var(--ink)}
+input[aria-invalid="true"]{border:1px dashed var(--ink)}
+input[readonly]{-webkit-text-fill-color:var(--ink);opacity:1}
+input.ok{border-color:var(--ink)}
+input.peek{cursor:pointer;caret-color:transparent}
+input.reveal[readonly]{background:var(--ink);border:1px solid var(--ink);-webkit-text-fill-color:var(--on-ink);color:var(--on-ink)}
+/* Stop the browser's autofill suggestions from painting their own
+   background/text colour over the themed inputs */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus{
+  -webkit-text-fill-color:var(--ink);caret-color:var(--ink);
+  box-shadow:0 0 0 1000px var(--surface) inset;-webkit-box-shadow:0 0 0 1000px var(--surface) inset;
+  transition:background-color 9999s ease-in-out 0s;
+}
+
+.feedback{min-height:3.3em;text-align:center}
+.msg{margin:0;color:var(--muted);font-size:.95rem}
+.msg.err,.msg.ok{color:var(--ink);font-weight:600}
+.msg.err::before{content:"\2715\00a0"}
+.msg.ok::before{content:"\2713\00a0"}
+.answer{margin:2px 0 0;color:var(--muted);white-space:nowrap;font-family:var(--mono);font-size:.85rem;font-size:min(.95rem,calc((100vw - 2 * var(--pad)) / 22))}
+
+/* On-screen 0 / 1 keypad: shown on touch devices, so no system keyboard covers the screen */
+.keypad{display:none;grid-template-columns:1fr 1fr 1fr;gap:10px}
+@media (pointer:coarse){.keypad{display:grid}}
+.keypad.off{opacity:.4}
+.key{
+  height:56px;border-radius:var(--r);border:1px solid var(--line);background:var(--surface);color:var(--ink);
+  font:600 1.6rem/1 var(--mono);cursor:pointer;-webkit-appearance:none;appearance:none;padding:0;
+  transition:background .08s,color .08s;
+}
+.key.back{font-size:1.3rem}
+.key:active{background:var(--ink);color:var(--on-ink)}
+
+.row{display:flex;gap:10px}
+.btn{
+  height:52px;border-radius:var(--r);border:1px solid var(--line);background:transparent;color:var(--ink);
+  font:600 1rem/1 var(--sans);cursor:pointer;-webkit-appearance:none;appearance:none;transition:opacity .15s,border-color .15s;
+}
+.btn.primary{flex:1;background:var(--ink);border-color:var(--ink);color:var(--on-ink)}
+.btn.ghost{padding:0 22px}
+.btn:active{opacity:.7}
+@media (hover:hover){.btn.ghost:hover{border-color:var(--ink)}.btn.primary:hover{opacity:.9}}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);text-align:center;margin:0;padding-top:14px;border-top:1px solid var(--line)}
+.stats div{display:flex;flex-direction:column;gap:2px}
+.stats b{font-size:1.15rem;font-weight:650;font-variant-numeric:tabular-nums}
+.stats span{color:var(--muted);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase}
+
+/* "See why" link under the answer */
+.link{margin-top:6px;padding:6px 4px;border:0;background:none;color:var(--ink);font:600 .9rem/1 var(--sans);text-decoration:underline;text-underline-offset:4px;cursor:pointer;-webkit-appearance:none;appearance:none}
+.link:active{opacity:.6}
+
+/* Pop-up: the lesson opens over the page after a wrong answer (bottom sheet on phones, centred on wide screens) */
+.overlay{position:fixed;inset:0;z-index:20;display:flex;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.6);opacity:0;transition:opacity .2s}
+.overlay.show{opacity:1}
+.sheet{
+  width:100%;max-width:560px;max-height:92%;display:flex;flex-direction:column;overflow:hidden;
+  background:var(--bg);border:1px solid var(--line);border-bottom:0;border-radius:24px 24px 0 0;
+  transform:translateY(28px);transition:transform .24s cubic-bezier(.2,.8,.2,1);
+}
+.overlay.show .sheet{transform:none}
+@media (min-width:640px){
+  .overlay{align-items:center;padding:24px}
+  .sheet{max-height:min(780px,100%);border-bottom:1px solid var(--line);border-radius:24px}
+}
+/* Smaller pop-up for shorter content (e.g. the mode list), so it
+   reads as a modal over the app instead of covering the screen */
+.sheet.compact{max-height:min(68vh,520px);max-height:min(68dvh,520px)}
+@media (min-width:640px){.sheet.compact{max-height:min(520px,80%)}}
+.sheet-head{padding:18px 22px 10px}
+.sheet-head h2{margin:0 0 4px;font-size:1.15rem;font-weight:700;letter-spacing:-.02em}
+.sheet-head p{margin:0;color:var(--muted);font-size:.86rem}
+.sheet-body{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:4px 22px 18px}
+.sheet-foot{padding:14px 22px;padding-bottom:calc(14px + env(safe-area-inset-bottom));border-top:1px solid var(--line);background:var(--bg)}
+
+/* Lesson content inside the pop-up */
+.lesson{display:flex;flex-direction:column;gap:14px;text-align:left;min-width:0}
+.lgoods{display:flex;flex-direction:column;gap:6px}
+.lgood{margin:0;color:var(--muted);font:.82rem/1.3 var(--mono)}
+.lgood::before{content:"\2713\00a0";color:var(--ink)}
+.lcard{display:flex;flex-direction:column;gap:12px;min-width:0;padding:16px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+.lhead{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.lhead h3{margin:0;font-size:1rem;font-weight:650}
+.lval{font:700 1.15rem/1 var(--mono);letter-spacing:-.02em}
+.why,.how,.sum{margin:0;font-size:.9rem}
+.why b,.sum{font-weight:650}
+.how{color:var(--muted)}
+.cap{margin:4px 0 -6px;color:var(--muted);font-size:.8rem}
+.g8{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:4px}
+.g8 span{text-align:center}
+.g8.pow span{font:.72rem/1.2 var(--mono);color:var(--muted)}
+.g8.wts span{font:.72rem/1.2 var(--mono);color:var(--muted);margin-top:-6px}
+.g8.bits span{padding:9px 0;font:600 1.05rem/1 var(--mono);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px}
+.g8.bits span.bad{border:1px dashed var(--ink)}
+.g8.bits span.fix{background:var(--ink);color:var(--on-ink);border-color:var(--ink)}
+
+/* Step-by-step is tucked away until asked for */
+.more{border-top:1px solid var(--line);padding-top:12px}
+.more summary{display:flex;align-items:center;justify-content:space-between;cursor:pointer;list-style:none;font-size:.92rem;font-weight:650}
+.more summary::-webkit-details-marker{display:none}
+.more summary::after{content:"+";font:500 1.2rem/1 var(--mono);color:var(--muted)}
+.more[open] summary::after{content:"\2212"}
+.more[open] summary{margin-bottom:10px}
+.more > .how{margin-bottom:8px}
+.more > .sum{margin-top:10px}
+.steps{display:flex;flex-direction:column;font:.85rem/1.3 var(--mono)}
+.step{display:grid;grid-template-columns:3.4ch minmax(0,1fr) 2.4ch;gap:10px;align-items:center;padding:6px 0;border-top:1px solid var(--line)}
+.step .w{font-weight:600}
+.step .t{color:var(--muted)}
+.step.on .t{color:var(--ink)}
+.step .bit{padding:3px 0;text-align:center;font-weight:700;border:1px solid var(--line);border-radius:6px}
+.step.on .bit{background:var(--ink);color:var(--on-ink);border-color:var(--ink)}
+
+/* Short screens (small phones, landscape): tighten everything so it all stays in view */
+.compact .app{gap:12px}
+.compact main{gap:10px}
+.compact .eyebrow{display:none}
+.compact input{height:46px}
+.compact .key,.compact .btn{height:48px}
+.compact .feedback{min-height:2.7em}
+.compact .stats{padding-top:10px}
+.compact .stats b{font-size:1rem}
+@media (max-width:340px){.fields{gap:10px 8px}.chip{padding:0 11px}}
+@media (min-width:900px){.app{max-width:720px}.key,.btn,input{height:58px}}
+
+.shake{animation:shake .32s linear}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+@media (prefers-reduced-motion:reduce){.shake{animation:none}*{transition:none !important}}
+
+/* [NEW] header + dropdown menu */
+.chip.icon{width:34px;padding:0;font-size:1rem;flex:none;display:inline-flex;align-items:center;justify-content:center}
+.chip[disabled]{opacity:.35;pointer-events:none}
+h1{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.brand{min-width:0;flex:1 1 auto;overflow:hidden}
+header{flex-wrap:nowrap}
+.menu-wrap{position:relative;flex:none}
+#menu-btn[aria-expanded="true"]{background:var(--ink);border-color:var(--ink);color:var(--on-ink)}
+.menu{
+  position:absolute;top:calc(100% + 8px);right:0;z-index:15;min-width:216px;
+  display:flex;flex-direction:column;gap:2px;padding:6px;
+  background:var(--surface);border:1px solid var(--line);border-radius:16px;
+  box-shadow:0 12px 32px rgba(0,0,0,.35);
+}
+:root[data-theme="light"] .menu{box-shadow:0 12px 32px rgba(0,0,0,.14)}
+.menu[hidden]{display:none}
+.mi{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;
+  height:42px;padding:0 12px;border:0;border-radius:10px;background:transparent;color:var(--ink);
+  font:500 .92rem/1 var(--sans);text-align:left;cursor:pointer;-webkit-appearance:none;appearance:none;
+  transition:background .12s;
+}
+@media (hover:hover){.mi:not([disabled]):hover{background:var(--bg)}}
+.mi:active{opacity:.7}
+.mi[aria-pressed="true"]::after{content:"\2713";font-weight:700}
+.mi[disabled]{opacity:.35;pointer-events:none}
+.mi-sep{height:1px;margin:5px 6px;background:var(--line)}
+
+/* [NEW] sprint timer */
+.timer{display:flex;align-items:center;gap:10px;font:600 .85rem/1 var(--mono);font-variant-numeric:tabular-nums}
+.tbar{flex:1;height:6px;border-radius:6px;background:var(--line);overflow:hidden}
+.tbar i{display:block;height:100%;width:100%;background:var(--ink)}
+.timer .sc{min-width:3ch;text-align:right}
+
+/* [NEW] prompt area */
+.big{font-size:2.2rem;display:flex;flex-direction:column;gap:2px;min-width:0}
+.big .ip{font-size:inherit}
+.plines{display:flex;flex-direction:column;gap:2px;align-items:center}
+.pl{margin:0;color:var(--muted);font:500 .9rem/1.3 var(--mono);text-align:center}
+.qtext{margin:0;text-align:center;font-size:1.02rem;line-height:1.45;text-wrap:balance}
+.qtext.sm{font-size:.95rem}
+.answer.note{white-space:normal;font-family:var(--sans);font-size:.88rem;line-height:1.4}
+.fields.one{grid-template-columns:minmax(0,260px);justify-content:center}
+.field.single label{text-align:center}
+
+/* [NEW] choice buttons */
+.choices{display:grid;grid-template-columns:1fr;gap:10px}
+.choices.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.opt{
+  min-height:52px;padding:12px 14px;text-align:left;border:1px solid var(--line);border-radius:14px;background:var(--surface);color:var(--ink);
+  font:500 .95rem/1.3 var(--sans);cursor:pointer;-webkit-appearance:none;appearance:none;transition:background .1s,color .1s,border-color .1s;
+}
+.choices.two .opt{text-align:center}
+.opt.mono{font-family:var(--mono);font-size:.92rem;letter-spacing:.01em}
+.opt:active{background:var(--ink);color:var(--on-ink)}
+@media (hover:hover){.opt:hover{border-color:var(--ink)}}
+.opt.ok{background:var(--ink);color:var(--on-ink);border-color:var(--ink)}
+.opt.bad{border:1px dashed var(--ink)}
+.opt[disabled]{cursor:default}
+
+/* [NEW] keypad variants */
+.keypad.dec .key{height:48px}
+.keypad .key.aux{font-size:1.25rem}
+.compact .keypad.dec .key{height:42px}
+.key.gap{visibility:hidden}
+
+/* [NEW] sheet variants */
+.sheet-body{display:flex;flex-direction:column;gap:14px}
+.sheet-foot .btn{flex:1}
+.sheet-foot .btn.ghost{flex:none}
+.grp{margin:14px 0 2px;font:650 .7rem/1 var(--sans);color:var(--muted);letter-spacing:.07em;text-transform:uppercase}
+.grp:first-child{margin-top:0}
+.modes-grp{display:flex;flex-direction:column;gap:1px}
+.mode{
+  display:flex;flex-direction:column;gap:1px;width:100%;text-align:left;padding:9px 8px;
+  border:0;border-radius:10px;background:transparent;color:var(--ink);font:inherit;
+  cursor:pointer;-webkit-appearance:none;appearance:none;
+}
+.mode.on{background:var(--surface)}
+@media (hover:hover){.mode:not(.on):hover{background:var(--surface)}}
+.mode .mt{display:flex;justify-content:space-between;align-items:baseline;gap:8px;min-width:0}
+.mode b{font-size:.9rem;font-weight:650;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.mode .stars{flex:none;font:.72rem var(--mono);letter-spacing:.08em;color:var(--muted)}
+.mode.on .stars{color:var(--ink)}
+.mode .mm{display:flex;justify-content:space-between;align-items:baseline;gap:8px;min-width:0}
+.mode .md{color:var(--muted);font-size:.78rem;line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.mode .ms{flex:none;color:var(--muted);font:.7rem var(--mono)}
+.tbl{width:100%;border-collapse:collapse;font:.8rem/1.3 var(--mono)}
+.tbl th{font-weight:600;text-align:left;color:var(--muted);padding:5px 6px 5px 0;border-bottom:1px solid var(--line)}
+.tbl td{padding:5px 6px 5px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl tr.hi td{font-weight:700}
+.tbl tr.hi td:first-child::before{content:"\25B8\00a0"}
+.wrapx{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.code{margin:0;padding:12px;background:var(--bg);border:1px solid var(--line);border-radius:12px;font:.78rem/1.45 var(--mono);white-space:pre;overflow-x:auto}
+.para{margin:0;font-size:.9rem;line-height:1.45}
+.para.m{color:var(--muted)}
+.mono{font-family:var(--mono)}
+.chain{margin:0;font:.82rem/1.6 var(--mono);color:var(--ink);word-break:break-word}
+.big-num{font:700 2.4rem/1 var(--mono);text-align:center;letter-spacing:-.03em}
+.sum2{display:grid;grid-template-columns:repeat(3,1fr);text-align:center;gap:6px}
+.sum2 div{display:flex;flex-direction:column;gap:2px;padding:12px 4px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+.sum2 b{font-size:1.4rem;font-variant-numeric:tabular-nums}
+.sum2 span{color:var(--muted);font-size:.72rem}
+.miss{display:flex;flex-direction:column;gap:2px;padding:10px 0;border-top:1px solid var(--line);font-size:.85rem}
+.miss .q{font-family:var(--mono);color:var(--muted);word-break:break-word}
+.miss .a{font-weight:650}
+.study details.more{border-top:1px solid var(--line);padding-top:12px}
+.g8.bits.on span.fix{background:var(--ink)}
+.tag{display:inline-block;padding:2px 8px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font:.72rem/1.4 var(--mono)}
+
+/* [TWEAK] small screens + spacing */
+.more > * + *{margin-top:10px}
+.more > .steps{margin-top:0}
+@media (max-width:380px){.mark{display:none}}
+.compact .keypad.dec{gap:7px}
+.compact .keypad.dec .key{height:40px}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <header>
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 512 512" aria-hidden="true"><circle cx="205" cy="256" r="72" fill="none" stroke="currentColor" stroke-width="34"/><path d="M372 184V328" stroke="currentColor" stroke-width="34" stroke-linecap="round"/></svg>
+      <h1 id="title">IP to Binary</h1>
+    </div>
+    <div class="menu-wrap">
+      <button class="chip icon" id="menu-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Menu">
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <div class="menu" id="menu" role="menu" hidden>
+        <button class="mi" id="modes-btn" type="button" role="menuitem">Modes</button>
+        <button class="mi" id="study-btn" type="button" role="menuitem">Study</button>
+        <div class="mi-sep"></div>
+        <button class="mi" id="lv-btn" type="button" role="menuitem">Level: Standard</button>
+        <button class="mi" id="sprint-btn" type="button" role="menuitem" aria-pressed="false">Sprint 60s</button>
+        <button class="mi" id="weights-btn" type="button" role="menuitem" aria-pressed="false" hidden>Show weights</button>
+        <div class="mi-sep"></div>
+        <button class="mi" id="theme-btn" type="button" role="menuitem">Theme: Dark</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="timer" id="timer" hidden>
+    <span id="tlabel">1:00</span>
+    <div class="tbar"><i id="tfill"></i></div>
+    <span class="sc" id="tscore">0</span>
+  </div>
+
+  <main id="card">
+    <p class="eyebrow" id="eyebrow"></p>
+    <div class="big" id="big" aria-live="polite"></div>
+    <span class="ip ruler" id="ruler" aria-hidden="true"></span>
+    <div class="plines" id="plines"></div>
+    <p class="qtext" id="qtext"></p>
+    <div class="wt-wrap" id="wt" hidden>
+      <div class="weights pow"><span>2<sup>7</sup></span><span>2<sup>6</sup></span><span>2<sup>5</sup></span><span>2<sup>4</sup></span><span>2<sup>3</sup></span><span>2<sup>2</sup></span><span>2<sup>1</sup></span><span>2<sup>0</sup></span></div>
+      <div class="weights"><span>128</span><span>64</span><span>32</span><span>16</span><span>8</span><span>4</span><span>2</span><span>1</span></div>
+    </div>
+    <div class="fields" id="fields"></div>
+    <div class="choices" id="choices"></div>
+    <div class="feedback" aria-live="polite">
+      <p class="msg" id="msg"></p>
+      <p class="answer" id="answer"></p>
+      <button class="link" id="why" type="button" hidden>See why</button>
+    </div>
+    <div class="keypad" id="keypad"></div>
+    <div class="row">
+      <button class="btn primary" id="check" type="button">Check</button>
+      <button class="btn ghost" id="hint" type="button">Hint</button>
+      <button class="btn ghost" id="skip" type="button">Skip</button>
+    </div>
+  </main>
+
+  <div class="stats">
+    <div><b id="ns">0</b><span>Solved</span></div>
+    <div><b id="ne">0</b><span>Errors</span></div>
+    <div><b id="nk">0</b><span>Streak</span></div>
+    <div><b id="nb">0</b><span>Best</span></div>
+  </div>
+</div>
+
+<div class="overlay" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title" hidden>
+  <div class="sheet">
+    <div class="sheet-head">
+      <h2 id="sheet-title"></h2>
+      <p id="sheet-sub"></p>
+    </div>
+    <div class="sheet-body lesson" id="sheet-body"></div>
+    <div class="sheet-foot row" id="sheet-foot"></div>
+  </div>
+</div>
+
+<script>
+/* ============ [LOGIC] helpers ============ */
+const rnd = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
+const pickOne = arr => arr[rnd(0, arr.length - 1)];
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = rnd(0, i); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const bin8 = v => v.toString(2).padStart(8, '0');
+const W = [128, 64, 32, 16, 8, 4, 2, 1];
+const POW = [7, 6, 5, 4, 3, 2, 1, 0];
+const list = a => a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1];
+const ipStr = a => a.join('.');
+const toInt = a => (((a[0] << 24) | (a[1] << 16) | (a[2] << 8) | a[3]) >>> 0);
+const toArr = n => [(n >>> 24) & 255, (n >>> 16) & 255, (n >>> 8) & 255, n & 255];
+const maskInt = p => p <= 0 ? 0 : (0xFFFFFFFF << (32 - p)) >>> 0;
+const maskArr = p => toArr(maskInt(p));
+const pow2 = n => Math.pow(2, n);
+const strip = s => String(s).replace(/\^[0-9?]+/g, m => m.slice(1));
+
+/* [LOGIC] address generators */
+function genIp() { // home/office style
+  const third = () => Math.random() < 0.5 ? rnd(0, 20) : rnd(0, 255);
+  const host = () => Math.random() < 0.3 ? pickOne([1, 2, 10, 100, 101, 200, 254]) : rnd(1, 254);
+  const r = Math.random();
+  if (r < 0.6) return [192, 168, third(), host()];
+  if (r < 0.85) return [10, rnd(0, 255), rnd(0, 255), host()];
+  return [172, rnd(16, 31), third(), host()];
+}
+function genIpHard() {
+  let a; do { a = rnd(1, 223); } while (a === 127);
+  return [a, rnd(0, 255), rnd(0, 255), rnd(1, 254)];
+}
+function genIpEasy() { return [pickOne([192, 10]), rnd(0, 63), rnd(0, 63), rnd(1, 63)]; }
+function genByLevel(lv) { return lv === 0 ? genIpEasy() : lv === 1 ? genIp() : genIpHard(); }
+function ipForPrefix(p) {
+  if (p < 16) return [10, rnd(0, 255), rnd(0, 255), rnd(1, 254)];
+  const r = Math.random();
+  if (r < 0.5) return [192, 168, rnd(0, 255), rnd(1, 254)];
+  if (r < 0.8) return [172, rnd(16, 31), rnd(0, 255), rnd(1, 254)];
+  return [10, rnd(0, 255), rnd(0, 255), rnd(1, 254)];
+}
+
+/* [LOGIC] one octet: 1 to 8 binary digits whose value matches */
+const okBits = (s, v) => { s = s.replace(/\s+/g, ''); return /^[01]{1,8}$/.test(s) && parseInt(s, 2) === v; };
+
+/* [LOGIC] works out what a wrong binary answer probably means */
+function explain(raw, v) {
+  const s = raw.replace(/\s+/g, '');
+  const t8 = s.padStart(8, '0'), c = bin8(v), tv = parseInt(s, 2);
+  const flip = [...t8].map(b => b === '1' ? '0' : '1').join('');
+  const rev = [...t8].reverse().join('');
+  const extra = [], missing = [];
+  for (let i = 0; i < 8; i++) {
+    if (t8[i] === '1' && c[i] === '0') extra.push(W[i]);
+    if (t8[i] === '0' && c[i] === '1') missing.push(W[i]);
+  }
+  const plural = a => a.length > 1;
+  const nbits = n => n + (n === 1 ? ' bit' : ' bits');
+  const diff = extra.length + missing.length;
+  const details = [];
+  if (extra.length) details.push('You wrote 1 in the ' + list(extra) + (plural(extra) ? ' places' : ' place') + ', but ' + v + (plural(extra) ? " doesn't use them." : " doesn't use it."));
+  if (missing.length) details.push('You wrote 0 in the ' + list(missing) + (plural(missing) ? ' places' : ' place') + ', but ' + v + (plural(missing) ? ' needs them.' : ' needs it.'));
+  let why;
+  if (s.length < 8 && s + '0'.repeat(8 - s.length) === c) {
+    why = 'You wrote only ' + nbits(s.length) + '. An octet has 8, and a short answer is read from the right, so the missing ' + (8 - s.length === 1 ? '0 at the end' : '0s at the end') + ' changed every place value. Write all 8 bits.';
+  } else if (diff >= 2 && rev === c) {
+    why = 'The bits are in reverse order. The leftmost bit is the biggest place value (128) and the rightmost is the smallest (1).';
+  } else if (diff >= 2 && flip === c) {
+    why = 'Every bit is flipped. A 1 means that power of two is used and a 0 means it is not.';
+  } else if (s === String(v)) {
+    why = 'You copied the decimal digits of ' + v + ' as if they were binary. Binary needs place values: break ' + v + ' into 128s, 64s, 32s and so on.';
+  } else if (diff >= 2 && t8 === c.slice(1) + '0') {
+    why = 'Your bits are shifted one place to the left, so every 1 is worth double what it should be. Start at the 128 place and count 8 places.';
+  } else if (diff >= 2 && t8 === '0' + c.slice(0, 7)) {
+    why = 'Your bits are shifted one place to the right, so every 1 is worth half what it should be. Start at the 128 place and count 8 places.';
+  } else {
+    const pre = [];
+    if (s.length < 8) pre.push('You wrote ' + nbits(s.length) + '. A short answer is read from the right, as ' + t8 + '.');
+    if (Math.abs(tv - v) === 1) pre.push('Close: your bits add up to ' + tv + ', only 1 off.');
+    why = pre.concat(details).join(' ');
+  }
+  return { s, t8, tv, why, short: s !== t8 };
+}
+
+/* ============ [STATE] saved progress ============ */
+const KEY = 'netbits-v1';
+const S = { xp: 0, lv: 1, mode: 'ip2bin', theme: 'dark', modes: {} };
+function loadState() {
+  try {
+    const o = JSON.parse(localStorage.getItem(KEY) || 'null');
+    if (o && typeof o === 'object') Object.assign(S, o);
+    const legacy = parseInt(localStorage.getItem('ip2bin-best'), 10); // old single-mode best streak
+    if (legacy > 0) { const m = stat('ip2bin'); if (legacy > m.b) m.b = legacy; }
+  } catch (e) {}
+}
+function saveState() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+function stat(id) { return S.modes[id] || (S.modes[id] = { s: 0, e: 0, b: 0, sp: 0 }); }
+const LEVELS = ['Easy', 'Standard', 'Hard'];
+const playerLevel = () => 1 + Math.floor(Math.sqrt(S.xp / 40));
+function stars(id) {
+  const m = S.modes[id]; if (!m) return 0;
+  const t = m.s + m.e, acc = t ? m.s / t : 0;
+  return (m.s >= 60 && acc >= 0.9) ? 3 : (m.s >= 30 && acc >= 0.8) ? 2 : (m.s >= 10) ? 1 : 0;
+}
+
+/* ============ [DOM] tiny builders ============ */
+const $ = id => document.getElementById(id);
+function el(tag, cls, text) {
+  const n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (text != null) n.textContent = text;
+  return n;
+}
+function setRich(node, s) { // ^7 becomes a superscript
+  node.textContent = '';
+  String(s).split(/(\^[0-9?]+)/).forEach(p => {
+    if (/^\^[0-9?]+$/.test(p)) node.appendChild(el('sup', null, p.slice(1)));
+    else if (p) node.appendChild(document.createTextNode(p));
+  });
+}
+function rich(tag, cls, s) { const n = el(tag, cls); setRich(n, s); return n; }
+function tbl(head, rows, hi) {
+  const wrap = el('div', 'wrapx'), t = el('table', 'tbl');
+  if (head) { const tr = el('tr'); head.forEach(h => tr.appendChild(el('th', null, h))); t.appendChild(tr); }
+  rows.forEach((r, i) => { const tr = el('tr', i === hi ? 'hi' : ''); r.forEach(c => tr.appendChild(rich('td', null, c))); t.appendChild(tr); });
+  wrap.appendChild(t); return wrap;
+}
+function bitsRow(str, cls, marks) { // marks: fn(index) -> class or ''
+  const g = el('div', 'g8 bits' + (cls ? ' ' + cls : ''));
+  [...str].forEach((b, k) => g.appendChild(el('span', marks ? marks(k) : '', b)));
+  return g;
+}
+function powRows() {
+  const pow = el('div', 'g8 pow');
+  POW.forEach(p => { const s = el('span'); s.append('2', el('sup', null, String(p))); pow.appendChild(s); });
+  const wts = el('div', 'g8 wts');
+  W.forEach(w => wts.appendChild(el('span', null, String(w))));
+  return [pow, wts];
+}
+function card(title, val) {
+  const c = el('article', 'lcard'), h = el('div', 'lhead');
+  h.append(el('h3', null, title), el('span', 'lval', val == null ? '' : String(val)));
+  c.appendChild(h); return c;
+}
+function why(text) { const p = el('p', 'why'), s = el('span'); setRich(s, text); p.append(el('b', null, 'Why it is wrong. '), s); return p; }
+function details(title, nodes) {
+  const d = el('details', 'more'); d.appendChild(el('summary', null, title));
+  nodes.forEach(n => d.appendChild(n)); return d;
+}
+function stepsBlock(v) { // subtract each place value that fits
+  const steps = el('div', 'steps'); let left = v;
+  W.forEach(w => {
+    const fits = left >= w, row = el('div', 'step' + (fits ? ' on' : ''));
+    row.append(el('span', 'w', String(w)), el('span', 't', fits ? left + ' \u2265 ' + w + ', left ' + (left - w) : left + ' < ' + w + ', skip'), el('span', 'bit', fits ? '1' : '0'));
+    if (fits) left -= w;
+    steps.appendChild(row);
+  });
+  return steps;
+}
+const ALGO = 'FOR each octet\n  left = octet\n  FOR w = 128, 64, 32, 16, 8, 4, 2, 1\n    IF left >= w THEN\n      write 1\n      left = left - w\n    ELSE\n      write 0\n    END IF\n  NEXT w\nNEXT octet';
+
+/* ============ [MODES] registry ============ */
+const MODES = {}, ORDER = [];
+function def(id, o) { o.id = id; MODES[id] = o; ORDER.push(id); }
+const choiceQ = o => Object.assign({ type: 'choice' }, o);
+const octLabels = (vals, bold) => vals.map((v, i) => ({ l: 'Octet ' + (i + 1) + (bold ? ': ' : ''), b: bold ? bold(v, i) : '' }));
+
+/* ---------- [LESSON] binary ---------- */
+function lessonBits(q, given) {
+  const out = [], goods = [];
+  q.vals.forEach((v, i) => {
+    if (q.match(i, given[i])) { goods.push(i); return; }
+    const c = bin8(v), info = explain(given[i], v), cd = card('Octet ' + (i + 1), v);
+    cd.appendChild(why(info.why));
+    cd.append(...powRows());
+    cd.appendChild(el('p', 'cap', 'You typed ' + info.s + ' = ' + info.tv + (info.short ? ' (read as ' + info.t8 + ')' : '')));
+    cd.appendChild(bitsRow(info.t8, '', k => info.t8[k] !== c[k] ? 'bad' : ''));
+    cd.appendChild(el('p', 'cap', 'Right answer: ' + c + ' = ' + v));
+    cd.appendChild(bitsRow(c, '', k => info.t8[k] !== c[k] ? 'fix' : ''));
+    const used = W.filter((w, k) => c[k] === '1');
+    cd.appendChild(details('How to get it right', [
+      el('p', 'how', 'Start with ' + v + '. Go through the place values from 128 down to 1. If a place value fits in what is left, write 1 and subtract it. If not, write 0.'),
+      stepsBlock(v),
+      el('p', 'sum', used.length ? 'Add the place values with a 1: ' + used.join(' + ') + ' = ' + v + '. So ' + v + ' is ' + c + '.' : 'No place value fits, so ' + v + ' is ' + c + '.')
+    ]));
+    out.push(cd);
+  });
+  if (goods.length) {
+    const box = el('div', 'lgoods');
+    goods.forEach(i => box.appendChild(el('p', 'lgood', 'Octet ' + (i + 1) + ' is right: ' + q.vals[i] + ' = ' + bin8(q.vals[i]))));
+    out.push(box);
+  }
+  out.push(details('The same method as a script', [
+    el('p', 'how', 'This is an algorithm with sequence, selection (IF) and iteration (FOR), the structures in the scripting unit. It always ends after 8 steps.'),
+    el('pre', 'code', ALGO)
+  ]));
+  return out;
+}
+function lessonDec(q, given) {
+  const out = [], goods = [];
+  q.vals.forEach((v, i) => {
+    if (q.match(i, given[i])) { goods.push(i); return; }
+    const c = bin8(v), tv = Number(given[i]), rv = parseInt([...c].reverse().join(''), 2);
+    const used = W.filter((w, k) => c[k] === '1');
+    let msg;
+    if (tv === rv && rv !== v) msg = 'You read the bits backwards. The leftmost bit is 128 and the rightmost is 1.';
+    else if (Math.abs(tv - v) === 1) msg = 'Close: you are 1 off. Check the last place values again.';
+    else msg = 'Only place values that sit under a 1 are added. Zeros add nothing.';
+    const cd = card('Octet ' + (i + 1), v);
+    cd.appendChild(why(msg));
+    cd.append(...powRows());
+    cd.appendChild(bitsRow(c, '', k => c[k] === '1' ? 'fix' : ''));
+    cd.appendChild(el('p', 'sum', (used.length ? used.join(' + ') : '0') + ' = ' + v + (given[i] !== '' ? '   (you typed ' + given[i] + ')' : '')));
+    out.push(cd);
+  });
+  if (goods.length) {
+    const box = el('div', 'lgoods');
+    goods.forEach(i => box.appendChild(el('p', 'lgood', 'Octet ' + (i + 1) + ' is right: ' + bin8(q.vals[i]) + ' = ' + q.vals[i])));
+    out.push(box);
+  }
+  return out;
+}
+def('ip2bin', {
+  short: 'IP to binary',
+  grp: 'Number systems', name: 'IP to binary', tag: 'CRIMAT0013A, ITINET0823B',
+  desc: 'Write each octet as 8 binary digits.',
+  gen(lv) {
+    const ip = genByLevel(lv);
+    return {
+      eyebrow: 'Write it in binary', big: [ipStr(ip)], kind: 'bits', vals: ip,
+      labels: octLabels(ip, v => String(v)), ph: '00000000', max: 8, weights: true,
+      hint: 'Go from 128 down to 1. If the place value fits in what is left, write 1 and subtract it. If not, write 0.',
+      answer: () => ip.map(bin8).join('.'), lesson: lessonBits
+    };
+  }
+});
+def('bin2ip', {
+  short: 'Binary to IP',
+  grp: 'Number systems', name: 'Binary to IP', tag: 'CRIMAT0013A',
+  desc: 'Convert 4 binary octets to dotted decimal.',
+  gen(lv) {
+    const ip = genByLevel(lv), b = ip.map(bin8);
+    return {
+      eyebrow: 'Write it in decimal', big: [b[0] + '.' + b[1], b[2] + '.' + b[3]], kind: 'dec', vals: ip,
+      labels: octLabels(ip, (v, i) => b[i]), ph: '0', max: 3, weights: true,
+      hint: 'Add up the place values (128, 64, 32, 16, 8, 4, 2, 1) that have a 1 under them.',
+      answer: () => ipStr(ip), lesson: lessonDec
+    };
+  }
+});
+
+/* ---------- [LESSON] powers ---------- */
+function lessonPow(q, given) {
+  const { k, n } = q.meta, v = pow2(n), out = [], c = el('article', 'lcard');
+  const chain = []; for (let i = 0; i <= n; i++) chain.push(pow2(i));
+  let t;
+  if (k === 'fwd') t = '2^' + n + ' means start at 1 and double ' + n + ' times.';
+  else if (k === 'rev') t = 'Count the doublings needed to get from 1 to ' + v + '. It takes ' + n + ', so the exponent is ' + n + '.';
+  else if (k === 'bits') t = 'Every extra bit doubles the number of values. ' + n + ' bits gives 2^' + n + ' = ' + v + ' different values (0 to ' + (v - 1) + ').';
+  else t = n + ' bits gives 2^' + n + ' = ' + v + ' values, and they start at 0, so the largest is ' + v + ' - 1 = ' + (v - 1) + '.';
+  c.appendChild(why(t));
+  c.appendChild(el('p', 'cap', 'Doubling from 1:'));
+  c.appendChild(el('p', 'chain', chain.join('  \u2192  ')));
+  if (given[0] !== '') c.appendChild(el('p', 'cap', 'You typed ' + given[0] + '. Right answer: ' + q.vals[0] + '.'));
+  if (k === 'max' || k === 'bits') c.appendChild(rich('p', 'para m', 'An octet is 8 bits: 2^8 = 256 values, so the biggest octet is 255. That is why IPv4 octets stop at 255.'));
+  out.push(c);
+  return out;
+}
+def('pow2', {
+  short: 'Powers of 2',
+  grp: 'Number systems', name: 'Powers of two', tag: 'CRIMAT0013A exponents',
+  desc: 'Doubling, exponents, and n-bit value counts.',
+  gen(lv) {
+    const top = [8, 12, 16][lv], k = pickOne(lv === 0 ? ['fwd', 'rev'] : ['fwd', 'rev', 'bits', 'max']), n = rnd(1, top);
+    const q = { kind: 'num', max: 5, ph: '?', labels: [{ l: 'Your answer', b: '' }], lesson: lessonPow, meta: { k, n } };
+    if (k === 'fwd') { q.eyebrow = 'Work out the power'; q.big = ['2^' + n]; q.vals = [pow2(n)]; q.hint = 'Start at 1 and double it ' + n + ' times.'; }
+    else if (k === 'rev') { q.eyebrow = 'Find the exponent'; q.big = ['2^? = ' + pow2(n)]; q.vals = [n]; q.hint = 'How many times do you double 1 to reach ' + pow2(n) + '?'; }
+    else if (k === 'bits') { q.eyebrow = 'How many values fit?'; q.text = 'How many different values can ' + n + (n === 1 ? ' bit' : ' bits') + ' hold?'; q.vals = [pow2(n)]; q.hint = 'Each extra bit doubles the count. 1 bit holds 2 values.'; }
+    else { q.eyebrow = 'Biggest number'; q.text = 'What is the largest decimal number you can write with ' + n + (n === 1 ? ' bit?' : ' bits?'); q.vals = [pow2(n) - 1]; q.hint = 'All bits set to 1. It is one less than the number of values.'; }
+    q.answer = () => String(q.vals[0]);
+    return q;
+  }
+});
+
+/* ---------- [LESSON] masks ---------- */
+function lessonMask(q, given) {
+  const { p } = q.meta, m = maskArr(p), c = el('article', 'lcard');
+  c.appendChild(why('A /' + p + ' mask has ' + p + ' one-bits from the left, then ' + (32 - p) + ' zero-bits. Each 8 ones make a 255.'));
+  const bins = m.map(bin8).join('.');
+  c.appendChild(el('pre', 'code', bins + '\n' + m.map(v => String(v).padStart(8)).join('.')));
+  const rows = m.map((v, i) => { const ones = Math.max(0, Math.min(8, p - 8 * i)); return ['Octet ' + (i + 1), String(ones), ones === 8 ? '255' : ones === 0 ? '0' : '256 - 2^' + (8 - ones) + ' = ' + v]; });
+  c.appendChild(tbl(['', '1 bits', 'Value'], rows));
+  c.appendChild(el('p', 'para m', 'Partly filled octets can only be 128, 192, 224, 240, 248, 252 or 254.'));
+  if (given.join('').length) c.appendChild(el('p', 'cap', 'You typed ' + given.join('.') + '. Right answer: ' + (q.meta.f === 'p2m' ? ipStr(m) : '/' + p) + '.'));
+  return [c];
+}
+def('mask', {
+  short: 'Subnet masks',
+  grp: 'Addressing a peripheral', name: 'Subnet masks', tag: 'ITINET1753B 1.2',
+  desc: 'Convert a /prefix to a mask, or count its 1 bits.',
+  gen(lv) {
+    const ps = lv === 0 ? [8, 16, 24] : lv === 1 ? [16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30] : Array.from({ length: 22 }, (_, i) => i + 9);
+    const p = pickOne(ps), m = maskArr(p), f = Math.random() < 0.6 ? 'p2m' : 'm2p';
+    if (f === 'p2m') return {
+      eyebrow: 'Write the subnet mask', big: ['/' + p], kind: 'dec', vals: m, labels: octLabels(m), ph: '0', max: 3,
+      hint: 'The prefix is the number of 1 bits from the left. Every 8 ones is 255. A partial octet: 128, 192, 224, 240, 248, 252, 254.',
+      answer: () => ipStr(m), lesson: lessonMask, meta: { p, f }
+    };
+    return {
+      eyebrow: 'Count the 1 bits: give the prefix', big: [ipStr(m)], kind: 'num', vals: [p], max: 2, ph: '/?', labels: [{ l: 'Prefix length (/n)', b: '' }],
+      hint: '255 is 8 ones. 192 is 2 ones, 224 is 3, 240 is 4, 248 is 5, 252 is 6, 254 is 7.',
+      answer: () => '/' + p, lesson: lessonMask, meta: { p, f }
+    };
+  }
+});
+
+/* ---------- [LESSON] generic choice ---------- */
+function lessonChoice(q, pick) {
+  const c = el('article', 'lcard');
+  if (pick != null && pick !== q.correct) c.appendChild(el('p', 'para m', 'You chose: ' + strip(q.options[pick])));
+  const p = el('p', 'why'); p.append(el('b', null, 'Right answer. '), strip(q.options[q.correct])); c.appendChild(p);
+  if (q.note) c.appendChild(el('p', 'para', q.note));
+  if (q.body) q.body().forEach(n => c.appendChild(n));
+  return [c];
+}
+
+/* ---------- address class ---------- */
+const CLASSES = [['Class A', '1 - 126', '/8  255.0.0.0'], ['Class B', '128 - 191', '/16  255.255.0.0'], ['Class C', '192 - 223', '/24  255.255.255.0'], ['Class D', '224 - 239', 'multicast']];
+const CRANGE = [[1, 126], [128, 191], [192, 223], [224, 239]];
+def('class', {
+  short: 'Address class',
+  grp: 'Addressing a peripheral', name: 'Address class', tag: 'ITINET1753B 1.2',
+  desc: 'Name the class from the first octet.',
+  gen(lv) {
+    const ci = rnd(0, lv === 0 ? 2 : 3), [lo, hi] = CRANGE[ci];
+    const a = (lv === 2 && Math.random() < 0.6) ? pickOne([lo, hi]) : rnd(lo, hi);
+    const ip = [a, rnd(0, 255), rnd(0, 255), rnd(1, 254)];
+    return choiceQ({
+      eyebrow: 'Which address class?', big: [ipStr(ip)], options: CLASSES.map(c => c[0]), correct: ci, two: true,
+      hint: 'Look at the first octet only: A 1-126, B 128-191, C 192-223, D 224-239.',
+      note: 'The first octet is ' + a + ', which falls in ' + CLASSES[ci][0] + ' (' + CLASSES[ci][1] + ').',
+      body: () => [tbl(['Class', 'First octet', 'Default mask'], CLASSES, ci), el('p', 'para m', '127.x.x.x is reserved for loopback, so class A stops at 126.')]
+    });
+  }
+});
+
+/* ---------- address type ---------- */
+const ATYPES = ['Private', 'Public', 'Loopback', 'APIPA (self-assigned)'];
+function isPrivate(a) { return a[0] === 10 || (a[0] === 172 && a[1] >= 16 && a[1] <= 31) || (a[0] === 192 && a[1] === 168); }
+function typeOf(a) { if (a[0] === 127) return 2; if (a[0] === 169 && a[1] === 254) return 3; return isPrivate(a) ? 0 : 1; }
+function genPublic(lv) {
+  if (lv === 2 && Math.random() < 0.6) return pickOne([[172, 15, rnd(0, 255), rnd(1, 254)], [172, 32, rnd(0, 255), rnd(1, 254)], [192, 169, rnd(0, 255), rnd(1, 254)], [192, 167, rnd(0, 255), rnd(1, 254)], [11, rnd(0, 255), rnd(0, 255), rnd(1, 254)], [169, 253, rnd(0, 255), rnd(1, 254)]]);
+  let a; do { a = rnd(1, 223); } while (a === 10 || a === 127 || a === 172 || a === 192 || a === 169);
+  return [a, rnd(0, 255), rnd(0, 255), rnd(1, 254)];
+}
+const ATYPE_NOTE = [
+  'Private addresses are not routed on the internet. Typical for office LANs and network printers.',
+  'Public addresses are routable on the internet. A printer should not sit on one directly.',
+  'Loopback (127.0.0.0/8) always points back at the same computer. Used to test the local network software.',
+  'A device that asks for DHCP and gets no answer gives itself 169.254.x.x. On a printer this means it never got a lease: check the cable, the switch port and the DHCP server, or set a static address.'
+];
+def('atype', {
+  short: 'Address type',
+  grp: 'Addressing a peripheral', name: 'Address type', tag: 'ITINET1753B 1.2, 1.5',
+  desc: 'Private, public, loopback, APIPA, or a DHCP failure.',
+  gen(lv) {
+    const t = rnd(0, 3); let ip;
+    if (t === 0) {
+      if (lv === 0) ip = pickOne([[192, 168, rnd(0, 20), rnd(1, 254)], [10, rnd(0, 20), rnd(0, 20), rnd(1, 254)]]);
+      else ip = lv === 1 ? genIp() : pickOne([[172, 16, rnd(0, 255), rnd(1, 254)], [172, 31, rnd(0, 255), rnd(1, 254)], [10, 255, rnd(0, 255), rnd(1, 254)], [192, 168, 255, rnd(1, 254)], genIp()]);
+    } else if (t === 1) ip = genPublic(lv);
+    else if (t === 2) ip = lv === 0 ? [127, 0, 0, 1] : [127, rnd(0, 255), rnd(0, 255), rnd(1, 254)];
+    else ip = [169, 254, rnd(1, 254), rnd(1, 254)];
+    return choiceQ({
+      eyebrow: 'What type of address is this?', big: [ipStr(ip)], options: ATYPES, correct: t, two: true,
+      hint: 'Private: 10.x, 172.16-31.x, 192.168.x. Loopback: 127.x. APIPA: 169.254.x.',
+      note: ATYPE_NOTE[t],
+      body: () => [tbl(['Type', 'Range'], [['Private', '10.0.0.0 - 10.255.255.255'], ['Private', '172.16.0.0 - 172.31.255.255'], ['Private', '192.168.0.0 - 192.168.255.255'], ['Loopback', '127.0.0.0 - 127.255.255.255'], ['APIPA', '169.254.0.0 - 169.254.255.255'], ['Public', 'everything else']], (t === 0 ? (ip[0] === 10 ? 0 : ip[0] === 172 ? 1 : 2) : t === 2 ? 3 : t === 3 ? 4 : 5))]
+    });
+  }
+});
+
+/* ---------- [LESSON] subnet maths ---------- */
+function subnetCalc(ip, p) {
+  const ipI = toInt(ip), mI = maskInt(p), net = (ipI & mI) >>> 0, bc = (net | (~mI >>> 0)) >>> 0;
+  return { net, bc, first: (net + 1) >>> 0, last: (bc - 1) >>> 0, m: maskArr(p) };
+}
+const SUB_INTRO = {
+  net: 'The network address has every host bit set to 0. You get it by ANDing the address with the mask.',
+  bcast: 'The broadcast address has every host bit set to 1. It is the last address in the subnet.',
+  first: 'The first usable host is the network address plus 1.',
+  last: 'The last usable host is the broadcast address minus 1.'
+};
+function lessonSubnet(q, given) {
+  const { ip, p, k } = q.meta, r = subnetCalc(ip, p), netA = toArr(r.net), bcA = toArr(r.bc), c = el('article', 'lcard');
+  c.appendChild(why(SUB_INTRO[k]));
+  c.appendChild(tbl(['Octet', 'Address', 'Mask', 'Network', 'Broadcast'], ip.map((v, i) => [String(i + 1), String(v), String(r.m[i]), String(netA[i]), String(bcA[i])])));
+  const idx = p % 8 === 0 ? -1 : Math.floor(p / 8);
+  if (idx < 0) c.appendChild(el('p', 'para m', 'The mask is 255 or 0 in every octet, so the network address copies the 255 octets and has 0 in the rest. The broadcast has 255 in the rest.'));
+  else {
+    c.appendChild(el('p', 'para m', 'Octets where the mask is 255 are copied and octets where it is 0 become 0 (network) or 255 (broadcast). Only octet ' + (idx + 1) + ' needs bits:'));
+    const a = bin8(ip[idx]), m = bin8(r.m[idx]), n = bin8(netA[idx]), b = bin8(bcA[idx]);
+    c.appendChild(el('p', 'cap', 'Address octet ' + (idx + 1) + ' = ' + ip[idx]));
+    c.appendChild(bitsRow(a));
+    c.appendChild(el('p', 'cap', 'Mask octet = ' + r.m[idx]));
+    c.appendChild(bitsRow(m));
+    c.appendChild(el('p', 'cap', 'AND gives the network octet = ' + netA[idx]));
+    c.appendChild(bitsRow(n, '', i => m[i] === '1' ? '' : 'fix'));
+    c.appendChild(el('p', 'cap', 'Host bits all 1 gives the broadcast octet = ' + bcA[idx]));
+    c.appendChild(bitsRow(b, '', i => m[i] === '1' ? '' : 'fix'));
+  }
+  if (k === 'first') c.appendChild(el('p', 'sum', 'Network ' + ipStr(netA) + ' + 1 = ' + ipStr(q.vals)));
+  else if (k === 'last') c.appendChild(el('p', 'sum', 'Broadcast ' + ipStr(bcA) + ' - 1 = ' + ipStr(q.vals)));
+  else c.appendChild(el('p', 'sum', 'Answer: ' + ipStr(q.vals)));
+  if (given.join('').length) c.appendChild(el('p', 'cap', 'You typed ' + given.join('.')));
+  return [c];
+}
+def('subnet', {
+  short: 'Subnet maths',
+  grp: 'Addressing a peripheral', name: 'Network and broadcast', tag: 'ITINET1753B 1.2, ITINET1733B 3',
+  desc: 'Find the network, broadcast, or usable host range.',
+  gen(lv) {
+    const ps = lv === 0 ? [8, 16, 24] : lv === 1 ? [25, 26, 27, 28, 29, 30] : [12, 13, 14, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30];
+    const p = pickOne(ps), kinds = lv === 2 ? ['net', 'bcast', 'first', 'last'] : ['net', 'bcast'], k = pickOne(kinds);
+    let ip, r; do { ip = ipForPrefix(p); r = subnetCalc(ip, p); } while (toInt(ip) === r.net || toInt(ip) === r.bc);
+    const target = r[k === 'net' ? 'net' : k === 'bcast' ? 'bc' : k], vals = toArr(target);
+    const title = { net: 'Find the network address', bcast: 'Find the broadcast address', first: 'Find the first usable host', last: 'Find the last usable host' }[k];
+    return {
+      eyebrow: title, big: [ipStr(ip)], lines: ['/' + p + ' = ' + ipStr(r.m)], kind: 'dec', vals, labels: octLabels(vals), ph: '0', max: 3,
+      hint: 'Where the mask is 255 copy the address octet. Where it is 0 use 0 (network) or 255 (broadcast). In between, work in binary.',
+      answer: () => ipStr(vals), lesson: lessonSubnet, meta: { ip, p, k }
+    };
+  }
+});
+
+/* ---------- usable hosts ---------- */
+function lessonHosts(q, given) {
+  const { f, p, need } = q.meta, c = el('article', 'lcard');
+  if (f === 'p2h') {
+    const h = 32 - p;
+    c.appendChild(why('/' + p + ' leaves 32 - ' + p + ' = ' + h + ' host bits. That gives 2^' + h + ' = ' + pow2(h) + ' addresses. Take away the network and broadcast addresses: ' + pow2(h) + ' - 2 = ' + (pow2(h) - 2) + '.'));
+  } else {
+    const h = 32 - p;
+    c.appendChild(why(need + ' devices need at least ' + need + ' usable addresses. 2^' + (h - 1) + ' - 2 = ' + (pow2(h - 1) - 2) + ' is too few, but 2^' + h + ' - 2 = ' + (pow2(h) - 2) + ' fits. So h = ' + h + ' host bits and the prefix is 32 - ' + h + ' = /' + p + '.'));
+  }
+  const rows = []; for (let h = 2; h <= 10; h++) rows.push(['/' + (32 - h), String(h), String(pow2(h) - 2)]);
+  c.appendChild(tbl(['Prefix', 'Host bits', 'Usable hosts'], rows, 32 - p - 2 >= 0 && 32 - p <= 10 ? 32 - p - 2 : -1));
+  if (given[0] !== '') c.appendChild(el('p', 'cap', 'You typed ' + given[0] + '. Right answer: ' + ansStr(q) + '.'));
+  return [c];
+}
+const ansStr = q => q.answer();
+def('hosts', {
+  short: 'Usable hosts',
+  grp: 'Addressing a peripheral', name: 'Usable hosts', tag: 'ITINET1753B 1.1, 4.4',
+  desc: 'Count usable hosts, or pick a big-enough prefix.',
+  gen(lv) {
+    if (Math.random() < 0.6) {
+      const p = pickOne(lv === 0 ? [24, 25, 26, 27, 28] : lv === 1 ? [22, 23, 24, 25, 26, 27, 28, 29, 30] : [16, 18, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]);
+      return { eyebrow: 'How many usable hosts?', big: ['/' + p], kind: 'num', vals: [pow2(32 - p) - 2], max: 6, ph: '?', labels: [{ l: 'Usable hosts', b: '' }],
+        hint: 'Host bits = 32 - prefix. Usable = 2^(host bits) - 2.'.replace('2^(host bits)', 'two to the power of the host bits'),
+        answer: () => String(pow2(32 - p) - 2), lesson: lessonHosts, meta: { f: 'p2h', p } };
+    }
+    const h = rnd(3, lv === 0 ? 6 : lv === 1 ? 8 : 10), lo = pow2(h - 1) - 1, hi = pow2(h) - 2, need = rnd(lo, hi), p = 32 - h;
+    return { eyebrow: 'Smallest subnet that fits', text: 'A site needs ' + need + ' addresses for PCs, printers and scanners. What is the smallest prefix (/n) that fits them?', kind: 'num', vals: [p], max: 2, ph: '/?', labels: [{ l: 'Prefix length (/n)', b: '' }],
+      hint: 'Find the smallest host-bit count h where 2^h - 2 is at least ' + need + '. Prefix = 32 - h.'.replace('2^h', 'two to the power of h'),
+      answer: () => '/' + p, lesson: lessonHosts, meta: { f: 'h2p', p, need } };
+  }
+});
+
+/* ---------- same subnet? ---------- */
+const PCS = ['Front desk PC', 'Accounts PC', 'Lab PC 4', 'Manager laptop', 'Library PC', 'HR workstation'];
+const PRINTERS = ['Accounts laser', 'Front-desk printer', 'Lab printer', 'Staff-room MFP', 'Library scanner'];
+function lessonSame(q, given, pick) {
+  const { a, b, p } = q.meta, ra = subnetCalc(a, p), rb = subnetCalc(b, p), same = ra.net === rb.net, c = el('article', 'lcard');
+  if (pick != null && pick !== q.correct) c.appendChild(el('p', 'para m', 'You chose: ' + q.options[pick]));
+  const t = el('p', 'why'); t.append(el('b', null, 'Right answer. '), q.options[q.correct]); c.appendChild(t);
+  c.appendChild(el('p', 'para', 'Each device\'s network address is its address ANDed with the mask (/' + p + ' = ' + ipStr(ra.m) + ').'));
+  c.appendChild(tbl(['Device', 'Address', 'Network'], [[q.meta.na, ipStr(a), ipStr(toArr(ra.net))], [q.meta.nb, ipStr(b), ipStr(toArr(rb.net))]]));
+  c.appendChild(el('p', 'para', same ? 'The network addresses match, so both devices are on one subnet and can talk directly.' : 'The network addresses differ, so the printer is on another subnet. Traffic must go through a router, or the printer needs an address inside the PC\'s subnet.'));
+  return [c];
+}
+def('samesub', {
+  short: 'Same subnet?',
+  grp: 'Addressing a peripheral', name: 'Can the PC reach it?', tag: 'ITINET1753B 1.5, 4.5',
+  desc: 'Can the PC and printer reach each other?',
+  gen(lv) {
+    const p = lv === 0 ? 24 : lv === 1 ? pickOne([24, 25, 26]) : pickOne([22, 23, 25, 26, 27, 28]), size = pow2(32 - p);
+    const region = toInt([192, 168, 0, 0]), blocks = 65536 / size, k = rnd(1, blocks - 2), base = region + k * size;
+    const off = () => rnd(1, size - 2), same = Math.random() < 0.5;
+    const A = base + off(); let B;
+    if (same) { do { B = base + off(); } while (B === A); }
+    else {
+      const k2 = (lv === 2 && Math.random() < 0.7) ? (Math.random() < 0.5 ? k + 1 : k - 1) : rnd(1, blocks - 2);
+      const kk = k2 === k ? k + 1 : k2, nb = region + kk * size;
+      B = nb + ((lv === 2) ? (Math.random() < 0.5 ? 1 : size - 2) : off());
+    }
+    const a = toArr(A), b = toArr(B), na = pickOne(PCS), nb = pickOne(PRINTERS);
+    const ok = subnetCalc(a, p).net === subnetCalc(b, p).net;
+    const q = choiceQ({
+      eyebrow: 'A user says printing fails', lines: [na + '  ' + ipStr(a), nb + '  ' + ipStr(b), 'Both use /' + p + ' = ' + ipStr(maskArr(p))],
+      text: 'Are they on the same subnet, so they can talk without a router?',
+      options: ['Yes, same subnet', 'No, different subnets'], correct: ok ? 0 : 1, two: true,
+      hint: 'Work out each network address with the same mask. Same network address means same subnet.',
+      note: ok ? 'Same network address, so they share a subnet.' : 'Different network addresses, so a router is needed or the printer address must change.',
+      meta: { a, b, p, na, nb }
+    });
+    q.lesson = (qq, pick) => lessonSame(qq, null, pick);
+    return q;
+  }
+});
+
+/* ---------- printer set-up scenario ---------- */
+const PRESETS = [
+  { p: 24, pool: [100, 199], srv: [10, 20] }, { p: 25, pool: [60, 99], srv: [10, 20] },
+  { p: 26, pool: [20, 39], srv: [5, 6] }, { p: 27, pool: [10, 19], srv: [4] }
+];
+def('printer', {
+  short: 'Printer setup',
+  grp: 'Addressing a peripheral', name: 'Set up a network printer', tag: 'ITINET1753B 1.2, 1.5',
+  desc: 'Pick a valid static address for a new printer.',
+  gen(lv) {
+    const pre = lv === 0 ? PRESETS[0] : lv === 1 ? pickOne(PRESETS.slice(0, 2)) : pickOne(PRESETS), size = pow2(32 - pre.p);
+    const a3 = rnd(1, 200), k = rnd(0, 256 / size - 1), net = toInt([192, 168, a3, 0]) + k * size, bc = net + size - 1, gw = net + 1;
+    const srv = pre.srv.map(o => net + o), lo = net + pre.pool[0], hi = net + pre.pool[1];
+    const good = []; for (let o = 2; o <= size - 2; o++) { if (pre.srv.includes(o)) continue; if (o >= pre.pool[0] && o <= pre.pool[1]) continue; good.push(o); }
+    const correct = net + pickOne(good);
+    const bad = {
+      net: [net, 'is the network address. It names the subnet and cannot be given to a device.'],
+      bc: [bc, 'is the broadcast address. It reaches every device on the subnet.'],
+      gw: [gw, 'is the gateway (the router). Using it would clash with the router.'],
+      srv: [pickOne(srv), 'is already used by the file server.'],
+      pool: [net + rnd(pre.pool[0] + 1, pre.pool[1] - 1), 'is inside the DHCP pool. DHCP could give it to a PC and cause a conflict.'],
+      other: [net + size + rnd(2, size - 3), 'belongs to a different subnet, so PCs on this subnet cannot reach it directly.']
+    };
+    const picks = shuffle(Object.keys(bad)).slice(0, 3);
+    const opts = shuffle([{ ip: correct, ok: true, r: 'is a free host address: not the network, broadcast, gateway, a server or in the DHCP pool.' }].concat(picks.map(x => ({ ip: bad[x][0], ok: false, r: bad[x][1] }))));
+    const A = toArr(net), pfx = A[0] + '.' + A[1] + '.' + A[2] + '.';
+    const lines = ['Subnet: ' + ipStr(A) + '/' + pre.p, 'Gateway: ' + ipStr(toArr(gw)), 'DHCP pool: ' + pfx + (pre.pool[0] + (net & 255)) + '-' + (pre.pool[1] + (net & 255)), 'File server: ' + pre.srv.map(o => ipStr(toArr(net + o))).join(', ')];
+    return choiceQ({
+      eyebrow: 'Choose a static address for the new printer', lines, options: opts.map(o => ipStr(toArr(o.ip))), mono: true,
+      correct: opts.findIndex(o => o.ok),
+      feedback: pick => ipStr(toArr(opts[pick].ip)) + ' ' + opts[pick].r,
+      hint: 'A device cannot use the network address, broadcast, gateway, an address already in use, or anything in the DHCP pool. It must also be inside the subnet.',
+      note: 'After connecting the printer, test it for correct operation (for example ping it and print a test page) and give it a meaningful name.',
+      body: () => opts.map(o => { const p = el('p', 'para'); p.append(el('b', 'mono', ipStr(toArr(o.ip))), ' ' + o.r); return p; })
+    });
+  }
+});
+
+/* ---------- naming convention (15 characters) ---------- */
+const CITIES = [['Kingston', 'KING'], ['Montego Bay', 'MOBY'], ['Mandeville', 'MAND'], ['Ocho Rios', 'OCHO'], ['Spanish Town', 'SPAN'], ['Portmore', 'PORT'], ['Negril', 'NEGR']];
+const PTYPES = [['laser printer', 'LSR'], ['inkjet printer', 'INK'], ['scanner', 'SCN'], ['plotter', 'PLT'], ['NAS drive', 'NAS'], ['fax modem', 'FAX']];
+const SITES = [['Accounts', 'ACC'], ['Level 2', 'L02'], ['Reception', 'RCP'], ['Library', 'LIB'], ['Computer lab', 'LAB'], ['Human resources', 'HR1']];
+const NAME_FIELDS = [['1 - 4', 'City or town'], ['5 - 7', 'Type of peripheral'], ['8 - 10', 'Workplace location'], ['11 - 15', 'Uniqueness (device number)']];
+function nameBody(name, hi) {
+  return [tbl(['Characters', 'Meaning', 'This name'], [[NAME_FIELDS[0][0], NAME_FIELDS[0][1], name.slice(0, 4)], [NAME_FIELDS[1][0], NAME_FIELDS[1][1], name.slice(4, 7)], [NAME_FIELDS[2][0], NAME_FIELDS[2][1], name.slice(7, 10)], [NAME_FIELDS[3][0], NAME_FIELDS[3][1], name.slice(10, 15)]], hi),
+    el('p', 'para m', 'A meaningful name shows the function and location, so users pick the right device instead of waiting at a printer three floors away.')];
+}
+def('naming', {
+  short: 'Naming',
+  grp: 'Addressing a peripheral', name: 'Name the peripheral', tag: 'ITINET1753B 2.2',
+  desc: 'Apply the 15-character naming convention.',
+  gen(lv) {
+    const c = pickOne(CITIES), t = pickOne(PTYPES), s = pickOne(SITES), num = rnd(1, lv === 0 ? 9 : 99);
+    const seq = String(num).padStart(5, '0'), name = c[1] + t[1] + s[1] + seq;
+    if (Math.random() < 0.6) {
+      const ds = [t[1] + c[1] + s[1] + seq, c[1] + s[1] + t[1] + seq, c[1] + t[1] + s[1] + String(num).padStart(3, '0'), c[1] + t[1] + seq + s[1]];
+      const opts = shuffle([name].concat(shuffle(ds).slice(0, 3)));
+      return choiceQ({
+        eyebrow: 'Which name follows the 15-character convention?', lines: ['City: ' + c[0] + ' (' + c[1] + ')', 'Type: ' + t[0] + ' (' + t[1] + ')', 'Location: ' + s[0] + ' (' + s[1] + ')', 'Device number: ' + num],
+        options: opts, correct: opts.indexOf(name), mono: true,
+        hint: 'Order: city (4 characters), type (3), workplace location (3), device number (5, padded with zeros).',
+        note: 'City, then type, then location, then a 5-digit number: ' + c[1] + ' ' + t[1] + ' ' + s[1] + ' ' + seq + '.',
+        body: () => nameBody(name, -1)
+      });
+    }
+    const f = rnd(0, 3);
+    return choiceQ({
+      eyebrow: 'Read the name', big: [name], text: 'What do characters ' + NAME_FIELDS[f][0] + ' tell you?',
+      options: NAME_FIELDS.map(x => x[1]), correct: f, two: true,
+      hint: 'Characters 1-4 city, 5-7 type, 8-10 location, 11-15 device number.',
+      note: 'Characters ' + NAME_FIELDS[f][0] + ' hold the ' + NAME_FIELDS[f][1].toLowerCase() + ': ' + name.slice([0, 4, 7, 10][f], [4, 7, 10, 15][f]) + '.',
+      body: () => nameBody(name, f)
+    });
+  }
+});
+
+/* ---------- course know-how deck (from the lecture notes) ---------- */
+const R_INST = 'Install peripherals to a network', R_CONF = 'Configure services to manage peripherals', R_ADMIN = 'Administer and maintain peripherals', R_USER = 'Administer user accounts', R_OUT = 'Course outlines';
+const KNOW = [
+  ['Placing peripherals', 'Which humidity range do the notes give for placing a printer?', ['20% to 80% relative humidity', '5% to 15% relative humidity', '90% to 100% relative humidity', 'Humidity does not matter'], 'Printers can jam if they get too hot or the paper gets too dry.', R_INST],
+  ['Placing peripherals', 'Which room temperature range do the notes give for a printer?', ['10 to 32.5 degrees C', '0 to 5 degrees C', '35 to 45 degrees C', '50 to 60 degrees C'], 'A steady room temperature keeps printers from over-heating and jamming.', R_INST],
+  ['Unpacking', 'You have bought a new peripheral. What should you do before unpacking it?', ['Read the instruction manual', 'Plug it in to test it', 'Install the drivers first', 'Cut all the packing tape off'], 'The manual shows how to unpack without damaging parts, including hidden transit protection.', R_INST],
+  ['Unpacking', 'A component is damaged or missing when you unpack a peripheral. What next?', ['Contact the vendor for a replacement', 'Install it anyway and report it later', 'Buy a part from a third party', 'Ignore it if the device powers on'], 'Check everything at unpacking, while a vendor replacement is still simple.', R_INST],
+  ['Placing peripherals', 'What should a peripheral not be exposed to?', ['Direct sunlight and chemicals such as ammonia-based cleaners', 'A sturdy, level surface', 'Good ventilation', 'A nearby LAN point'], 'Also avoid abrupt temperature or humidity changes.', R_INST],
+  ['Cabling', 'Which pairing of cable and speed matches the notes?', ['CAT5 UTP: 100 Mbps, CAT6: 1000 Mbps', 'CAT5 UTP: 1000 Mbps, CAT6: 100 Mbps', 'CAT5 UTP: 10 Mbps, CAT6: 100 Mbps', 'CAT5 UTP: 54 Mbps, CAT6: 11 Mbps'], 'Most organisations ran 100 Mbps over CAT5; CAT6 reaches 1000 Mbps.', R_INST],
+  ['Ethernet', 'What does an Ethernet frame carry in its header?', ['The destination and source address', 'Only the printer name', 'The driver version', 'The paper size'], 'Frames are short messages holding the destination and source address of each computer.', R_INST],
+  ['Ethernet', 'Which connector plugs a peripheral into a wired Ethernet wall point?', ['RJ-45', 'IrDA', 'SCSI', 'Firewire'], 'A peripheral normally connects to a hub, a switch or a wall connection wired into the network.', R_INST],
+  ['Host computers', 'A printer is shared from a PC that is also used heavily as a workstation. What happens?', ['The PC slows down when others print', 'The printer prints faster', 'Nothing changes', 'The drivers are removed'], 'A host that shares a busy peripheral should not be operated heavily as a workstation.', R_INST],
+  ['Connections', 'What is the main benefit of USB for connecting a peripheral?', ['Plug and play: little configuration and no reboot needed', 'It needs a reboot every time', 'It only works wirelessly', 'It only works with printers'], 'USB reduces configuration time when you add a device.', R_INST],
+  ['Connections', 'Which statement about speakers is right?', ['They attach to the local host only and cannot be used over the network', 'They are shared over the LAN like printers', 'They need a print server', 'They only work over 802.11'], 'Speakers use few resources but stay local.', R_INST],
+  ['Connections', 'Which peripheral connects straight to the network cable?', ['A network attached storage (NAS) device', 'Speakers', 'A mouse', 'A keyboard'], 'Scanners normally connect to a computer, and printers usually give you a choice.', R_INST],
+  ['Wireless', 'What does IrDA need between devices?', ['Line-of-sight', 'A wireless router', 'A domain controller', 'CAT6 cable'], 'IrDA is infra-red, so the devices must see each other.', R_INST],
+  ['Wireless', 'How does Bluetooth compare with IrDA?', ['It uses radio and is faster and more efficient', 'It uses infra-red and is slower', 'Both need line-of-sight', 'It is a full network technology'], 'IrDA and Bluetooth are not network technologies, just ways of connecting.', R_INST],
+  ['Wireless', 'Which standard do wireless LANs use?', ['802.11', 'RJ-45', 'SCSI', 'Parallel'], 'The notes quote 11 Mbps and 54 Mbps, dropping if there is interference or a weak signal.', R_INST],
+  ['Wireless', 'In infrastructure mode, how do wireless clients connect?', ['Through an access point that bridges to the wired LAN', 'Directly to each other with no fixed point', 'Through serial cables', 'Only over Bluetooth'], 'Access points connect to the wired Ethernet backbone.', R_INST],
+  ['Wireless', 'Which describes an ad hoc wireless network?', ['Peer-to-peer style with no fixed point; cheaper and easier to set up', 'Needs an access point and a wired backbone', 'The fastest and most secure mode', 'Only for printers'], 'Devices only need to be within range of each other.', R_INST],
+  ['Wireless', 'What is the main disadvantage of wireless connections?', ['Slower and less secure than cable', 'More cable clutter', 'A reboot for each device', 'They cannot connect printers'], 'Data is more open to hackers, and cordless devices are easier to steal.', R_INST],
+  ['Upgrades', 'Which upgrade adds two-sided printing to a large printer?', ['A duplex unit', 'An envelope feeder', 'An output stacker', 'A cabinet'], 'Other upgrades: envelope feeders, more memory, extra input trays and output stackers.', R_INST],
+  ['Upgrades', 'How can a NAS device usually be expanded?', ['By adding extra disk drives', 'With a film holder', 'With a duplex unit', 'With an envelope feeder'], 'Scanners take film or transparency holders; printers take memory and sheet handling.', R_INST],
+  ['Naming', 'In the 15-character naming convention, what are characters 1 to 4?', ['City or town', 'Type of peripheral', 'Workplace location', 'Device number'], 'Then 5-7 type, 8-10 location, 11-15 uniqueness.', R_CONF],
+  ['Naming', 'What are characters 11 to 15 in the convention?', ['Uniqueness of the device, usually a number sequence', 'City or town', 'Type of peripheral', 'Workplace location'], 'The number keeps each name unique.', R_CONF],
+  ['Naming', 'Why use a naming convention for peripherals?', ['So users can easily identify the right device', 'It makes printing faster', 'Ethernet requires it', 'To hide devices from users'], 'Users have waited by one printer while the job printed three floors away.', R_CONF],
+  ['Drivers', 'A workstation prints to a shared printer elsewhere on the network. Where are drivers needed?', ['On the workstation, and on the host that shares the printer', 'Only on the printer', 'Only on the server room PC', 'Nowhere'], 'Client and host both need drivers.', R_CONF],
+  ['Drivers', 'Where do you normally get a new driver if the CD is lost?', ['The vendor\'s website', 'The paper tray', 'The router', 'The monitor menu'], 'New operating systems may also need new drivers from the vendor.', R_CONF],
+  ['Drivers', 'When a user first connects to a shared printer, the host\'s drivers are...', ['Downloaded and installed automatically', 'Ignored', 'Emailed to the user', 'Copied by hand'], 'The network printer is then added to the workstation\'s printer list.', R_CONF],
+  ['Drivers', 'The workstation runs a different operating system from the server managing the printer. What follows?', ['Different drivers may be needed', 'The same driver always works', 'No driver is needed', 'Only USB drivers work'], 'Drivers are matched to the operating system.', R_CONF],
+  ['Sharing', 'How do users usually access a shared disk drive?', ['Map it: it gets a drive letter and acts like a local disk', 'It is copied to each PC', 'It becomes read only for ever', 'Drive letters are removed'], 'The administrator also sets permissions on the drive or folder.', R_CONF],
+  ['Sharing', 'Which order do administrators follow to enable user access?', ['Connect and install drivers, share, allow users or groups, set the security level', 'Set the security level, install drivers, share, connect', 'Share, connect, install drivers, set the security level', 'Allow users, install drivers, connect, share'], 'Then, on the client: allow access and install the drivers.', R_CONF],
+  ['Sharing', 'Which access levels does the reading mention?', ['Read only, read and execute, modify, full access', 'Read, write and delete only', 'Admin and guest only', 'On and off only'], 'Not every user should have access to every peripheral.', R_CONF],
+  ['Priorities', 'Three logical printers share one print device: Laser_High, Laser_Normal, Laser_Low. Who gets Laser_High?', ['Executives', 'Managers', 'Everyone', 'Visitors only'], 'Managers use Normal and everyone can use Low. Security and sharing restrict who sees which printer.', R_ADMIN],
+  ['Priorities', 'In Windows terms, what is a print device?', ['The physical printer (the printer is the logical name)', 'The logical name (the printer is physical)', 'The driver file', 'The print queue'], 'Several logical printers can point at one print device to give different priorities.', R_ADMIN],
+  ['Management software', 'Which is a function of print management software?', ['Start, stop or reset devices and queues, and monitor consumables', 'Repair worn parts', 'Replace toner by itself', 'Change IP classes'], 'It can also alert administrators to paper and toner levels.', R_ADMIN],
+  ['Usage monitoring', 'Why do organisations track peripheral usage?', ['Accounting, spare capacity and consumables', 'To remove drivers', 'To set humidity', 'To shorten cables'], 'Printers often have a counter or a configuration report showing pages printed.', R_ADMIN],
+  ['Maintenance', 'Which is right about maintenance types?', ['Toner is usage-based; paper is time-based', 'Toner is time-based; paper is usage-based', 'Both are usage-based', 'Both are time-based'], 'Opened paper dries out or absorbs moisture over weeks, causing misfeeds.', R_ADMIN],
+  ['Maintenance', 'Why avoid overstocking consumables?', ['They are expensive and quality falls over time', 'Printers refuse extra paper', 'Stock is taxed monthly', 'They damage the network'], 'Estimate replacement times so stock is enough but not excessive.', R_ADMIN],
+  ['Cleaning', 'How should you clean a keyboard?', ['Not with soap and water: it can short-circuit or make keys stick', 'Soak it in soapy water', 'Use it wet', 'Spray water into the keys'], 'Use a proper cleaning solution or alcohol on a lint-free cloth.', R_ADMIN],
+  ['Cleaning', 'Before opening computer equipment to remove dust you should...', ['Unplug it', 'Switch the monitor on', 'Wear metal jewellery', 'Spray it with cleaner'], 'Use compressed air or a vacuum on vents and the power supply.', R_ADMIN],
+  ['Safety', 'A colour CRT monitor holds a dangerous charge. How much voltage do the notes give?', ['25,000 volts', '240 volts', '5,000 volts', '1,000 volts'], 'Leave internal maintenance to a qualified technician.', R_ADMIN],
+  ['Safety', 'How hot can a laser printer fuser get, according to the notes?', ['600 degrees', '60 degrees', '100 degrees', '200 degrees'], 'Turn the printer off and let it cool before opening it.', R_ADMIN],
+  ['Safety', 'What do the notes say to do with an empty toner cartridge?', ['Put it in the container it arrived in and bin or recycle it', 'Burn it', 'Keep it in the printer', 'Pour the toner in a drain'], 'Wear gloves when changing toner and follow the manufacturer\'s advice.', R_ADMIN],
+  ['Cleaning', 'How should you clean a monitor?', ['Spray anti-static cleaner on a lint-free cloth, then wipe', 'Spray the cleaner straight on the screen', 'Use soap and water', 'Wipe with a dry paper towel'], 'This avoids liquid leaking into the edges.', R_ADMIN],
+  ['Documentation', 'What is a benefit of templates and forms for maintenance?', ['Consistent layout, faster to create and easier to find information', 'They replace maintenance', 'They make printers faster', 'They encrypt passwords'], 'Users open the template, then save it as a normal document in their own folder.', R_ADMIN],
+  ['User accounts', 'Which three items are normally needed to set up an account?', ['A user identifier, a password, and the resources and rules for that user', 'Name, address and phone number', 'A username, an email and a MAC address', 'A password, an IP address and a printer name'], 'Security rests on identifying the user, then applying an access control list.', R_USER],
+  ['User accounts', 'Why put users into groups?', ['The group gets the access and members inherit it', 'Each user needs separate permissions', 'Groups replace passwords', 'Groups cannot have access'], 'It makes access easier to manage and audit against guidelines.', R_USER],
+  ['User accounts', 'What is a legal login notice?', ['A message at connection that reminds users of the rules and obligations', 'A bill for usage', 'An error message', 'A printer status'], 'The outline also checks that appropriate legal notices display at log on.', R_USER],
+  ['User accounts', 'Local versus central authentication?', ['Local: the user exists on one computer. Central: network-wide access via the server', 'Local: network-wide. Central: one computer only', 'Both are the same', 'Central only applies to printers'], 'A user created on a Windows 2003 server has network-wide access, limited by permissions.', R_USER],
+  ['User accounts', 'Why should administrators not know user passwords?', ['Actions would be logged as the user and they could reach files denied to the admin', 'Passwords are too long', 'Servers forbid it by law', 'Administrators cannot type'], 'For a forgotten password, set a temporary one and record it in a system log.', R_USER],
+  ['User accounts', 'Which password policy is shown in the notes?', ['Remember 12 passwords, minimum 8 characters, complexity required', 'No history, minimum 2 characters', 'Change daily, no complexity', 'Only numbers allowed'], 'Rules cover length, mixed characters, frequency of change and reuse.', R_USER],
+  ['User accounts', 'Match the situation to the action: temporarily absent, left, replacement takes over.', ['Disable, delete, rename', 'Delete, rename, disable', 'Rename, disable, delete', 'Disable, rename, delete'], 'Old accounts that stay active are a risk, especially after termination.', R_USER],
+  ['User accounts', 'Which is poor security practice?', ['Giving a new recruit the leaver\'s account and password', 'A signed request form from the line manager', 'Filing requests for later audit', 'Users choosing their own first-login password'], 'Also poor: copying another user\'s access without checking what is needed.', R_USER],
+  ['User accounts', 'What is the best way to give the administrator new user details?', ['A form filled in by the user and signed by the line manager, then filed', 'A quick phone call', 'A verbal request', 'Copy another user\'s access'], 'The paper (or stored email) can be reviewed later for audits.', R_USER],
+  ['Outlines', 'What should happen after connecting a peripheral (ITINET1753B 1.5)?', ['Test it for correct operation', 'Leave it, users will report faults', 'Uninstall the drivers', 'Turn off logging'], 'Later: follow the manufacturer\'s maintenance schedule and monitor usage.', R_OUT],
+  ['Outlines', 'Before a network backup, ITINET1733B says to...', ['Scan and, if required, clean the network of viruses', 'Shut down all printers', 'Delete old users', 'Change every password'], 'Backups should not carry viruses.', R_OUT],
+  ['Outlines', 'Which structures should an algorithm use in ITINET0823B?', ['Structure, sequence, selection and iteration', 'Only iteration', 'Only selection', 'None: scripts have no structure'], 'It must also be guaranteed to end.', R_OUT],
+  ['Outlines', 'In ITIDAT1403B a restore is completed...', ['Under the supervision of an appropriate person', 'By any user', 'Without records', 'Only by the vendor'], 'It is also recorded according to organisational guidelines.', R_OUT]
+];
+let knowDeck = [];
+def('know', {
+  short: 'Know-how',
+  grp: 'Course knowledge', name: 'Peripheral know-how', tag: 'ITINET1753B, ITINET1733B, ITINET1483B',
+  desc: 'Quick questions from your lecture notes.',
+  gen() {
+    if (!knowDeck.length) knowDeck = shuffle(KNOW.map((_, i) => i));
+    const k = KNOW[knowDeck.pop()], opts = shuffle(k[2].map((t, i) => ({ t, c: i === 0 })));
+    return choiceQ({ eyebrow: k[0], text: k[1], options: opts.map(o => o.t), correct: opts.findIndex(o => o.c), note: k[3] + ' (' + k[4] + ')', textSmall: true });
+  }
+});
+
+/* ---------- mixed ---------- */
+def('mix', {
+  short: 'Mixed',
+  grp: 'Mixed', name: 'Mixed practice', tag: 'All units',
+  desc: 'A random question, weighted to your weak modes.',
+  gen(lv) {
+    const ids = ORDER.filter(x => x !== 'mix');
+    const ws = ids.map(id => { const m = S.modes[id]; const t = m ? m.s + m.e : 0; return 1 + (t ? (m.e / t) * 4 : 1); });
+    let r = Math.random() * ws.reduce((a, b) => a + b, 0), pick = ids[0];
+    for (let i = 0; i < ids.length; i++) { r -= ws[i]; if (r <= 0) { pick = ids[i]; break; } }
+    const q = MODES[pick].gen(lv); q.modeId = pick; return q;
+  }
+});
+
+/* ============ [UI] refs + state ============ */
+const bigEl = $('big'), rulerEl = $('ruler'), eyebrowEl = $('eyebrow'), plinesEl = $('plines'), qtextEl = $('qtext'), wtEl = $('wt');
+const fieldsEl = $('fields'), choicesEl = $('choices'), msgEl = $('msg'), answerEl = $('answer'), whyBtn = $('why'), keypadEl = $('keypad');
+const checkBtn = $('check'), hintBtn = $('hint'), skipBtn = $('skip'), cardEl = $('card'), sheetEl = $('sheet'), appEl = $('app'), titleEl = $('title');
+const root = document.documentElement;
+const coarse = !!(window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
+let Q = null, inputs = [], cur = 0, done = false, hinted = false, lastKey = '', streak = 0, given = null;
+const sp = { on: false, end: 0, dur: 60000, score: 0, total: 0, xp: 0, miss: [], timer: 0, adv: 0 };
+
+function setMsg(text, cls) { msgEl.textContent = text; msgEl.className = 'msg' + (cls ? ' ' + cls : ''); }
+function updateStats() { const m = stat(S.mode); $('ns').textContent = m.s; $('ne').textContent = m.e; $('nk').textContent = streak; $('nb').textContent = m.b; }
+
+/* ---- [FIT] one font size so the longest prompt line fits ---- */
+function fitBig() {
+  if (!Q || !Q.big || !Q.big.length) return;
+  const longest = Q.big.map(strip).sort((a, b) => b.length - a.length)[0];
+  rulerEl.textContent = longest; rulerEl.style.fontSize = '100px';
+  const need = rulerEl.getBoundingClientRect().width, have = bigEl.clientWidth;
+  bigEl.style.fontSize = (need > 0 && have > 0) ? Math.max(18, Math.min(64, Math.floor(100 * have / need * 0.97))) + 'px' : '';
+}
+function layout() {
+  const vv = window.visualViewport, h = (vv && vv.height) || window.innerHeight || 800;
+  root.style.setProperty('--vh', Math.round(h) + 'px');
+  root.classList.toggle('compact', h < 640);
+  fitBig();
+}
+window.addEventListener('resize', layout);
+window.addEventListener('orientationchange', layout);
+if (window.visualViewport) window.visualViewport.addEventListener('resize', layout);
+
+/* ---- [GUARD] no zoom, no copy / paste ---- */
+['gesturestart', 'gesturechange', 'gestureend'].forEach(t => document.addEventListener(t, e => e.preventDefault()));
+document.addEventListener('touchmove', e => { if (e.touches && e.touches.length > 1) e.preventDefault(); }, { passive: false });
+document.addEventListener('wheel', e => { if (e.ctrlKey || e.metaKey) e.preventDefault(); }, { passive: false });
+const block = e => e.preventDefault();
+['copy', 'cut', 'drop', 'dragover', 'dragstart'].forEach(t => document.addEventListener(t, block));
+document.addEventListener('paste', e => { e.preventDefault(); if (!done) setMsg('Pasting is turned off. Type your answer.'); });
+document.addEventListener('contextmenu', e => { if (e.target && (e.target.tagName === 'INPUT' || bigEl.contains(e.target))) e.preventDefault(); });
+document.addEventListener('touchstart', () => {}, { passive: true });
+
+/* ============ [SHEET] pop-up ============ */
+let sheetOpen = false, sheetTimer = 0;
+function openSheet(o) {
+  clearTimeout(sheetTimer);
+  $('sheet-title').textContent = o.title; $('sheet-sub').textContent = o.sub || ''; $('sheet-sub').hidden = !o.sub;
+  const b = $('sheet-body'); b.textContent = ''; o.body.forEach(n => b.appendChild(n));
+  const f = $('sheet-foot'); f.textContent = '';
+  o.foot.forEach(x => { const bt = el('button', 'btn ' + (x.primary ? 'primary' : 'ghost'), x.label); bt.type = 'button'; bt.addEventListener('click', x.fn); f.appendChild(bt); });
+  sheetEl.querySelector('.sheet').classList.toggle('compact', !!o.compact);
+  sheetOpen = true; sheetEl.hidden = false; appEl.inert = true; document.body.style.overflow = 'hidden';
+  void sheetEl.offsetWidth; sheetEl.classList.add('show'); b.scrollTop = 0;
+  if (f.firstChild) f.firstChild.focus({ preventScroll: true });
+}
+function closeSheet(skipFocus) {
+  if (!sheetOpen) return;
+  sheetOpen = false; sheetEl.classList.remove('show'); appEl.inert = false; document.body.style.overflow = '';
+  sheetTimer = setTimeout(() => { sheetEl.hidden = true; }, 220);
+  if (!skipFocus) (checkBtn.hidden ? skipBtn : checkBtn).focus({ preventScroll: true });
+}
+sheetEl.addEventListener('click', e => { if (e.target === sheetEl) closeSheet(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && sheetOpen) closeSheet(); });
+
+function openLesson() {
+  if (!Q) return;
+  const nodes = (Q.lesson || lessonChoice)(Q, given);
+  openSheet({
+    title: 'What went wrong', sub: Q.kind === 'bits' ? 'Dashed boxes are your wrong bits. Filled boxes show what they should be.' : 'Here is how to work it out.',
+    body: nodes, foot: [{ label: 'Next', primary: true, fn: () => { closeSheet(true); nextQ(); } }, { label: 'Close', fn: () => closeSheet() }]
+  });
+}
+whyBtn.addEventListener('click', openLesson);
+
+/* ============ [ROUND] build a question ============ */
+function makeQ() {
+  const m = MODES[S.mode]; let q, t = 0;
+  do {
+    q = m.gen(S.lv); if (!q.modeId) q.modeId = m.id;
+    q.key = [q.eyebrow, (q.big || []).join('|'), (q.lines || []).join('|'), q.text || '', (q.options || []).join('|')].join('#'); t++;
+  } while (q.key === lastKey && t < 20);
+  lastKey = q.key;
+  if (q.type !== 'choice') {
+    q.match = q.match || ((i, raw) => q.kind === 'bits' ? okBits(raw, q.vals[i]) : (raw !== '' && Number(raw) === q.vals[i]));
+    q.expect = i => q.kind === 'bits' ? bin8(q.vals[i]) : String(q.vals[i]);
+  }
+  return q;
+}
+function nextQ() { clearTimeout(sp.adv); newQ(); }
+function newQ() {
+  closeSheet(true);
+  Q = makeQ(); done = false; hinted = false; cur = 0; given = null;
+  render();
+}
+function render() {
+  eyebrowEl.textContent = Q.eyebrow || '';
+  bigEl.textContent = ''; (Q.big || []).forEach(l => bigEl.appendChild(rich('p', 'ip', l))); bigEl.hidden = !(Q.big && Q.big.length);
+  plinesEl.textContent = ''; (Q.lines || []).forEach(l => plinesEl.appendChild(el('p', 'pl', l))); plinesEl.hidden = !(Q.lines && Q.lines.length);
+  setRich(qtextEl, Q.text || ''); qtextEl.hidden = !Q.text; qtextEl.classList.toggle('sm', !!Q.textSmall);
+  const wb = $('weights-btn'); wb.hidden = !Q.weights; wtEl.hidden = !Q.weights || wb.getAttribute('aria-pressed') !== 'true';
+  answerEl.textContent = ''; answerEl.className = 'answer'; setMsg(''); whyBtn.hidden = true; cardEl.classList.remove('shake');
+  const isChoice = Q.type === 'choice';
+  fieldsEl.hidden = isChoice; choicesEl.hidden = !isChoice; keypadEl.hidden = isChoice;
+  if (isChoice) buildChoices(); else { buildFields(); buildKeypad(); }
+  syncButtons(); window.scrollTo(0, 0); layout();
+  if (!isChoice) inputs[0].focus({ preventScroll: true });
+}
+function syncButtons() {
+  const isChoice = Q.type === 'choice';
+  checkBtn.hidden = isChoice && !done; checkBtn.textContent = done ? 'Next' : 'Check';
+  skipBtn.hidden = done; hintBtn.hidden = done || !Q.hint || hinted || sp.on;
+  keypadEl.classList.toggle('off', done);
+}
+function buildChoices() {
+  choicesEl.textContent = ''; choicesEl.className = 'choices' + (Q.two ? ' two' : '');
+  Q.options.forEach((t, i) => {
+    const b = el('button', 'opt' + (Q.mono ? ' mono' : '')); b.type = 'button'; setRich(b, t);
+    b.addEventListener('click', () => pickChoice(i)); choicesEl.appendChild(b);
+  });
+}
+function clean(raw) {
+  let v = raw.replace(Q.kind === 'bits' ? /[^01]/g : /[^0-9]/g, '').slice(0, Q.max);
+  if (Q.kind !== 'bits') v = v.replace(/^0+(?=\d)/, '');
+  if (Q.kind === 'dec' && Number(v) > 255) v = v.slice(0, -1);
+  return v;
+}
+const advance = (v, sep) => Q.kind === 'bits' ? (v.length === 8 || (sep && v)) : Q.kind === 'dec' ? ((sep && v) || v.length === 3 || (v.length === 2 && Number(v) > 25)) : false;
+function setVal(i, v) { inputs[i].value = v; inputs[i]._prev = v; inputs[i].setAttribute('aria-invalid', 'false'); }
+function buildFields() {
+  fieldsEl.textContent = ''; const n = Q.vals.length; fieldsEl.className = 'fields' + (n === 1 ? ' one' : '');
+  inputs = Q.vals.map((v, i) => {
+    const wrap = el('div', 'field' + (n === 1 ? ' single' : '')), lab = el('label'), L = Q.labels[i];
+    lab.htmlFor = 'f' + i; lab.append(L.l); if (L.b) lab.appendChild(el('b', null, L.b));
+    const inp = el('input'); inp._prev = '';
+    inp.id = 'f' + i; inp.type = 'text'; inp.placeholder = Q.ph || '';
+    inp.setAttribute('inputmode', coarse ? 'none' : 'numeric');
+    ['autocomplete:off', 'autocorrect:off', 'autocapitalize:off', 'spellcheck:false'].forEach(s => { const [k, x] = s.split(':'); inp.setAttribute(k, x); });
+    inp.setAttribute('enterkeyhint', i === n - 1 ? 'done' : 'next');
+    inp.addEventListener('focus', () => { cur = i; });
+    inp.addEventListener('click', () => { // tap a wrong box to flip between yours and the right one
+      if (!inp._wrong) return;
+      const show = !inp.classList.contains('reveal');
+      inp.classList.toggle('reveal', show); inp.value = show ? Q.expect(i) : inp._mine;
+    });
+    inp.addEventListener('beforeinput', e => {
+      if (/^insert(FromPaste|FromDrop|FromYank|ReplacementText|FromPasteAsQuotation)$/.test(e.inputType || '') || (e.data && e.data.length > 1)) e.preventDefault();
+    });
+    inp.addEventListener('input', () => onType(i));
+    inp.addEventListener('keydown', e => onKey(e, i));
+    wrap.append(lab, inp); fieldsEl.appendChild(wrap);
+    return inp;
+  });
+}
+function onType(i) {
+  const inp = inputs[i], raw = inp.value;
+  if (raw.length - inp._prev.length > 1) { inp.value = inp._prev; return; }
+  const sep = /[.\s]$/.test(raw), v = clean(raw);
+  setVal(i, v);
+  if (v && advance(v, sep) && i < inputs.length - 1) { inputs[i + 1].focus(); inputs[i + 1].select(); }
+}
+function onKey(e, i) {
+  if (e.key === 'Enter') {
+    e.preventDefault(); e.stopPropagation();
+    if (!done && i < inputs.length - 1 && !inputs[i + 1].value.trim()) inputs[i + 1].focus(); else check();
+  } else if (e.key === 'Backspace' && !inputs[i].value && i > 0) inputs[i - 1].focus();
+}
+function buildKeypad() {
+  keypadEl.textContent = ''; const bits = Q.kind === 'bits', one = Q.vals.length === 1;
+  keypadEl.className = 'keypad' + (bits ? '' : ' dec') + (done ? ' off' : '');
+  const keys = bits ? [['0', '0'], ['1', '1'], ['back', '\u232B']]
+    : ['1', '2', '3', '4', '5', '6', '7', '8', '9'].map(k => [k, k]).concat([one ? ['gap', ''] : ['next', '.'], ['0', '0'], ['back', '\u232B']]);
+  keys.forEach(([k, t]) => {
+    const b = el('button', 'key' + (k === 'back' ? ' back' : '') + (k === 'next' ? ' aux' : '') + (k === 'gap' ? ' gap' : ''), t); b.type = 'button'; b.dataset.k = k;
+    b.setAttribute('aria-label', k === 'back' ? 'Delete' : k === 'next' ? 'Next box' : k === 'gap' ? '' : k);
+    if (k === 'gap') b.disabled = true;
+    b.addEventListener('mousedown', e => e.preventDefault());
+    b.addEventListener('click', () => press(k));
+    keypadEl.appendChild(b);
+  });
+}
+function press(k) { // on-screen keypad
+  if (done || !inputs.length) return;
+  const inp = inputs[cur];
+  if (k === 'back') {
+    if (inp.value) setVal(cur, inp.value.slice(0, -1));
+    else if (cur > 0) { cur--; setVal(cur, inputs[cur].value.slice(0, -1)); }
+  } else if (k === 'next') {
+    if (inp.value && cur < inputs.length - 1) cur++;
+  } else {
+    const v = clean(inp.value + k);
+    setVal(cur, v);
+    if (advance(v, false) && cur < inputs.length - 1) cur++;
+  }
+  inputs[cur].focus({ preventScroll: true });
+}
+
+/* ============ [ROUND] answer handling ============ */
+function check() {
+  if (done) { nextQ(); return; }
+  if (Q.type === 'choice') return;
+  inputs.forEach(x => x.setAttribute('aria-invalid', 'false'));
+  const empty = inputs.find(x => !x.value.trim());
+  if (empty) { setMsg('Fill in all the boxes.', 'err'); empty.focus({ preventScroll: true }); return; }
+  const ok = inputs.map((x, i) => Q.match(i, x.value));
+  resolve(ok.every(Boolean), ok, null);
+}
+function pickChoice(i) { if (!done && Q.type === 'choice') resolve(i === Q.correct, null, i); }
+function markChoices(pick) {
+  [...choicesEl.children].forEach((b, i) => { b.disabled = true; if (i === Q.correct) b.classList.add('ok'); else if (i === pick) b.classList.add('bad'); });
+}
+const ansText = q => q.type === 'choice' ? strip(q.options[q.correct]) : q.answer();
+function resolve(good, ok, pick) {
+  done = true; given = Q.type === 'choice' ? pick : inputs.map(x => x.value);
+  const targets = [stat(Q.modeId)]; if (S.mode === 'mix') targets.push(stat('mix'));
+  let gain = 0;
+  if (good) {
+    targets.forEach(t => t.s++); if (!hinted) streak++;
+    gain = (10 + 5 * S.lv) + (hinted ? 0 : Math.min(streak, 10)); S.xp += gain;
+    const own = stat(S.mode); if (streak > own.b) own.b = streak;
+  } else { targets.forEach(t => t.e++); streak = 0; }
+  saveState(); updateStats();
+  if (Q.type === 'choice') markChoices(pick);
+  else inputs.forEach((x, i) => { x.readOnly = true; if (ok[i]) x.classList.add('ok'); });
+  if (sp.on) { sprintResolve(good, gain); syncButtons(); return; }
+  if (good) {
+    setMsg('Correct.' + (hinted ? ' Hint used, streak unchanged.' : '') + ' +' + gain + ' XP', 'ok');
+    if (Q.type === 'choice') { answerEl.className = 'answer note'; answerEl.textContent = Q.feedback ? Q.feedback(pick) + ' ' + (Q.note || '') : (Q.note || ''); } else answerEl.textContent = Q.answer();
+  } else {
+    if (Q.type === 'choice') {
+      setMsg('Not quite.', 'err'); answerEl.className = 'answer note'; answerEl.textContent = Q.feedback ? Q.feedback(pick) : (Q.note || '');
+    } else {
+      const wrong = []; ok.forEach((g, i) => { if (!g) { inputs[i].setAttribute('aria-invalid', 'true'); wrong.push(Q.labels[i].l.replace(/:\s*$/, '')); } });
+      inputs.forEach((x, i) => { if (ok[i]) return; x._wrong = true; x._mine = x.value; x.classList.add('peek'); });
+      const nums = wrong.every(w => /^Octet \d$/.test(w)), who = nums ? 'Octet' + (wrong.length > 1 ? 's ' : ' ') + list(wrong.map(w => w.slice(6))) : list(wrong);
+      setMsg('Not quite. ' + (inputs.length > 1 ? who + (wrong.length > 1 ? ' are' : ' is') + ' wrong. Tap a dashed box to see the right answer.' : 'Tap the dashed box to see the right answer.'), 'err');
+    }
+    whyBtn.hidden = false; cardEl.classList.remove('shake'); void cardEl.offsetWidth; cardEl.classList.add('shake');
+    try { if (navigator.vibrate) navigator.vibrate(30); } catch (e) {}
+  }
+  syncButtons();
+}
+function hint() { if (done || !Q.hint || hinted) return; hinted = true; setMsg(Q.hint); hintBtn.hidden = true; }
+
+/* ============ [SPRINT] 60 second round ============ */
+const fmt = ms => { const s = Math.max(0, Math.ceil(ms / 1000)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+function lockChips(on) { ['modes-btn', 'study-btn', 'lv-btn'].forEach(id => { $(id).disabled = on; }); }
+function startSprint() {
+  if (sp.on) return;
+  Object.assign(sp, { on: true, end: Date.now() + sp.dur, score: 0, total: 0, xp: 0, miss: [] });
+  streak = 0; updateStats(); lockChips(true);
+  $('sprint-btn').textContent = 'Stop'; $('sprint-btn').setAttribute('aria-pressed', 'true');
+  $('timer').hidden = false; $('tscore').textContent = '0'; $('tlabel').textContent = fmt(sp.dur); $('tfill').style.width = '100%';
+  clearInterval(sp.timer); sp.timer = setInterval(tick, 100);
+  newQ();
+}
+function tick() {
+  const left = sp.end - Date.now();
+  $('tlabel').textContent = fmt(left); $('tfill').style.width = Math.max(0, left / sp.dur * 100) + '%';
+  if (left <= 0) endSprint();
+}
+function stopSprint() {
+  clearInterval(sp.timer); clearTimeout(sp.adv); sp.on = false; lockChips(false);
+  $('timer').hidden = true; $('sprint-btn').textContent = 'Sprint 60s'; $('sprint-btn').setAttribute('aria-pressed', 'false');
+}
+function promptText(q) { return strip((q.big || []).concat(q.lines || []).join(' ') || q.text || q.eyebrow || ''); }
+function sprintResolve(good, gain) {
+  sp.total++; sp.xp += gain;
+  if (good) {
+    sp.score++; $('tscore').textContent = sp.score; setMsg('Correct. +' + gain + ' XP', 'ok');
+    sp.adv = setTimeout(nextQ, 400);
+  } else {
+    const g = Q.type === 'choice' ? strip(Q.options[given]) : given.join('.');
+    sp.miss.push({ q: promptText(Q), you: g, right: ansText(Q) });
+    setMsg('Not quite.', 'err'); answerEl.className = 'answer note'; answerEl.textContent = 'Answer: ' + ansText(Q);
+    cardEl.classList.remove('shake'); void cardEl.offsetWidth; cardEl.classList.add('shake');
+    sp.adv = setTimeout(nextQ, 1300);
+  }
+}
+function endSprint() {
+  const { score, total, xp, miss } = sp; stopSprint();
+  const m = stat(S.mode), best = score > m.sp && score > 0; if (best) m.sp = score; saveState();
+  newQ();
+  const acc = total ? Math.round(score / total * 100) : 0, body = [];
+  const sum = el('div', 'sum2');
+  [[score, 'Correct'], [acc + '%', 'Accuracy'], ['+' + xp, 'XP']].forEach(([b, s]) => { const d = el('div'); d.append(el('b', null, String(b)), el('span', null, s)); sum.appendChild(d); });
+  body.push(sum);
+  body.push(el('p', 'para m', best ? 'New best for this mode and level.' : 'Best for this mode: ' + m.sp));
+  if (miss.length) {
+    body.push(el('p', 'grp', 'Missed'));
+    miss.slice(0, 10).forEach(x => { const d = el('div', 'miss'); d.append(el('span', 'q', x.q), el('span', null, 'You: ' + (x.you || 'blank')), el('span', 'a', 'Answer: ' + x.right)); body.push(d); });
+    if (miss.length > 10) body.push(el('p', 'para m', '+ ' + (miss.length - 10) + ' more'));
+  }
+  openSheet({ title: 'Sprint over', sub: MODES[S.mode].name + ', ' + LEVELS[S.lv], body, foot: [{ label: 'Play again', primary: true, fn: () => { closeSheet(true); startSprint(); } }, { label: 'Close', fn: () => closeSheet(true) }] });
+}
+$('sprint-btn').addEventListener('click', () => { if (sp.on) endSprint(); else startSprint(); });
+
+/* ============ [MENU] modes + study ============ */
+function setMode(id) {
+  if (sp.on) return;
+  S.mode = id; streak = 0; saveState(); titleEl.textContent = MODES[id].short || MODES[id].name; updateStats(); newQ();
+}
+function openModes() {
+  if (sp.on) return;
+  const body = []; let grp = '', wrap = null;
+  ORDER.forEach(id => {
+    const m = MODES[id];
+    if (m.grp !== grp) { grp = m.grp; body.push(el('p', 'grp', grp)); wrap = el('div', 'modes-grp'); body.push(wrap); }
+    const st = S.modes[id] || { s: 0, e: 0, sp: 0 }, n = stars(id), b = el('button', 'mode' + (id === S.mode ? ' on' : '')); b.type = 'button';
+    const mt = el('span', 'mt'); mt.append(el('b', null, m.name), el('span', 'stars', '\u2605'.repeat(n) + '\u2606'.repeat(3 - n)));
+    const mm = el('span', 'mm'); mm.append(el('span', 'md', m.desc), el('span', 'ms', st.s + ' solved'));
+    b.append(mt, mm);
+    b.addEventListener('click', () => { closeSheet(true); setMode(id); });
+    wrap.appendChild(b);
+  });
+  body.push(el('p', 'para m', '\u2605 10 solved \u00b7 \u2605\u2605 30 @ 80% \u00b7 \u2605\u2605\u2605 60 @ 90%'));
+  openSheet({ title: 'Modes', sub: 'Level ' + playerLevel() + ' \u00b7 ' + S.xp + ' XP', body, compact: true, foot: [{ label: 'Close', primary: true, fn: () => closeSheet() }] });
+}
+function studyNodes() {
+  const sec = (title, nodes, open) => { const d = details(title, nodes); if (open) d.open = true; return d; };
+  const out = [];
+  out.push(sec('Place values', [
+    ...powRows(),
+    el('p', 'para', 'Write 1 under every place value you use and 0 under the rest. All eight ones make 128 + 64 + 32 + 16 + 8 + 4 + 2 + 1 = 255, the biggest octet.'),
+    rich('p', 'para m', 'Eight bits give 2^8 = 256 values, 0 to 255.')
+  ], true));
+  const ch = []; for (let i = 0; i <= 16; i++) ch.push('2^' + i + '=' + pow2(i));
+  out.push(sec('Powers of two', [rich('p', 'chain', ch.join('   ')), el('p', 'para m', 'Each step doubles the last one.')]));
+  const mrows = [8, 16, 24, 25, 26, 27, 28, 29, 30].map(p => ['/' + p, ipStr(maskArr(p)), String(pow2(32 - p) - 2)]);
+  out.push(sec('Subnet masks', [tbl(['Prefix', 'Mask', 'Usable hosts'], mrows), rich('p', 'para m', 'Usable hosts = 2^h - 2, where h = 32 - prefix. Partial octets: 128, 192, 224, 240, 248, 252, 254.')]));
+  out.push(sec('Address ranges', [
+    tbl(['Class', 'First octet', 'Default mask'], CLASSES),
+    tbl(['Special', 'Range'], [['Private', '10.0.0.0 - 10.255.255.255'], ['Private', '172.16.0.0 - 172.31.255.255'], ['Private', '192.168.0.0 - 192.168.255.255'], ['Loopback', '127.0.0.0 - 127.255.255.255'], ['APIPA', '169.254.0.0 - 169.254.255.255']]),
+    el('p', 'para m', 'A printer showing 169.254.x.x did not get an address from DHCP.')
+  ]));
+  out.push(sec('Setting up a network printer', [
+    ['Read the manual, unpack and check every part. Damaged or missing: contact the vendor.', 'Place it near a LAN point on a sturdy, level, ventilated surface, out of sunlight. Keep humidity 20% to 80% and temperature 10 to 32.5 degrees C.', 'Connect with RJ-45 to a hub, switch or wall point (or USB to a host, or wireless).', 'Give it an address: DHCP reservation, or a static address that avoids the network, broadcast, gateway, servers and the DHCP pool.', 'Name it with the 15-character convention.', 'Install drivers on the host and the clients (vendor website).', 'Share it, allow users or groups, then set the security level.', 'Use several logical printers on one print device to give priorities.', 'Print a test page.', 'Set the maintenance schedule, usage logs and consumables checks.'].map((t, i) => el('p', 'para', (i + 1) + '. ' + t))
+  ].flat()));
+  out.push(sec('Connections and speeds', [tbl(['Link', 'Note'], [['CAT5 UTP', '100 Mbps'], ['CAT6', '1000 Mbps'], ['802.3ak', '10 Gbps (in your notes)'], ['802.11', '11 Mbps and 54 Mbps, slower with interference'], ['IrDA', 'infra-red, needs line-of-sight'], ['Bluetooth', 'radio, faster than IrDA'], ['USB', 'plug and play, no reboot']]), el('p', 'para m', 'Infrastructure mode uses an access point. Ad hoc is peer-to-peer with no fixed point.')]));
+  out.push(sec('Naming convention (15 characters)', [tbl(['Characters', 'Meaning', 'Example'], [['1 - 4', 'City or town', 'KING'], ['5 - 7', 'Type of peripheral', 'LSR'], ['8 - 10', 'Workplace location', 'ACC'], ['11 - 15', 'Device number', '00012']]), el('p', 'para m', 'KINGLSRACC00012')]));
+  out.push(sec('Print priorities', [el('p', 'para', 'One print device, three logical printers: Laser_High for executives, Laser_Normal for managers, Laser_Low for everyone. Higher priority jobs go first in the queue.')]));
+  out.push(sec('Decimal to binary as a script', [el('pre', 'code', ALGO)]));
+  return out;
+}
+function openStudy() {
+  if (sp.on) return;
+  openSheet({ title: 'Study sheet', sub: 'Quick reference from your course outlines and lecture notes.', body: studyNodes(), foot: [{ label: 'Close', primary: true, fn: () => closeSheet() }] });
+}
+
+/* ============ [WIRING] ============ */
+function applyTheme() { root.dataset.theme = S.theme; $('tc').setAttribute('content', S.theme === 'light' ? '#f6f6f4' : '#0b0b0c'); }
+function themeLabel() { $('theme-btn').textContent = 'Theme: ' + (S.theme === 'light' ? 'Light' : 'Dark'); }
+function levelLabel() { $('lv-btn').textContent = 'Level: ' + LEVELS[S.lv]; }
+checkBtn.addEventListener('click', check);
+skipBtn.addEventListener('click', () => { if (!done) { clearTimeout(sp.adv); newQ(); } });
+hintBtn.addEventListener('click', hint);
+$('modes-btn').addEventListener('click', openModes);
+$('study-btn').addEventListener('click', openStudy);
+$('lv-btn').addEventListener('click', () => { S.lv = (S.lv + 1) % 3; saveState(); levelLabel(); streak = 0; updateStats(); newQ(); });
+$('weights-btn').addEventListener('click', e => {
+  const on = e.currentTarget.getAttribute('aria-pressed') !== 'true';
+  e.currentTarget.setAttribute('aria-pressed', String(on)); wtEl.hidden = !on; layout();
+});
+$('theme-btn').addEventListener('click', () => { S.theme = S.theme === 'light' ? 'dark' : 'light'; saveState(); applyTheme(); themeLabel(); });
+
+/* [NEW] header dropdown menu: one three-line button reveals Modes,
+   Study, Level, Sprint, Weights and Theme, so the header itself
+   only ever shows the title and a single menu button. */
+const menuBtn = $('menu-btn'), menuEl = $('menu');
+function openMenu() { menuEl.hidden = false; menuBtn.setAttribute('aria-expanded', 'true'); }
+function closeMenu() { menuEl.hidden = true; menuBtn.setAttribute('aria-expanded', 'false'); }
+menuBtn.addEventListener('click', e => { e.stopPropagation(); menuEl.hidden ? openMenu() : closeMenu(); });
+menuEl.addEventListener('click', e => { if (e.target.closest('.mi')) closeMenu(); });
+document.addEventListener('click', e => { if (!menuEl.hidden && !e.target.closest('.menu-wrap')) closeMenu(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !menuEl.hidden) closeMenu(); });
+document.addEventListener('keydown', e => {
+  if ((e.ctrlKey || e.metaKey) && ['+', '=', '-', '_', '0'].includes(e.key)) { e.preventDefault(); return; }
+  if (sheetOpen || !Q) return;
+  if (Q.type === 'choice' && !done && /^[1-9]$/.test(e.key) && Number(e.key) <= Q.options.length) { pickChoice(Number(e.key) - 1); return; }
+  if (e.key === 'Enter' && done && !(e.target && e.target.tagName === 'BUTTON')) { e.preventDefault(); nextQ(); }
+});
+
+loadState();
+if (!MODES[S.mode]) S.mode = 'ip2bin';
+if (![0, 1, 2].includes(S.lv)) S.lv = 1;
+applyTheme(); themeLabel(); levelLabel(); titleEl.textContent = MODES[S.mode].short || MODES[S.mode].name; updateStats();
+newQ();
+</script>
+</body>
+</html>
